@@ -110,6 +110,21 @@ export function AccessibilityProvider({ children }) {
   const currentAudioRef = useRef(null);
   const currentObjectURLRef = useRef(null);
 
+  // Store browser voices in state to guarantee asynchronous voice availability
+  const [browserVoices, setBrowserVoices] = useState([]);
+
+  useEffect(() => {
+    if (typeof window !== "undefined" && window.speechSynthesis) {
+      const loadVoices = () => {
+        setBrowserVoices(window.speechSynthesis.getVoices());
+      };
+      loadVoices();
+      if (window.speechSynthesis.onvoiceschanged !== undefined) {
+        window.speechSynthesis.onvoiceschanged = loadVoices;
+      }
+    }
+  }, []);
+
   // ── Persist state to localStorage on every change ──
   useEffect(() => {
     persistState(state);
@@ -229,15 +244,23 @@ export function AccessibilityProvider({ children }) {
             utterance.lang = "vi-VN";
 
             // Find best available Vietnamese voice
-            const voicesList = window.speechSynthesis.getVoices();
+            const voicesList = browserVoices.length > 0 ? browserVoices : window.speechSynthesis.getVoices();
+            console.log("[TTS Voices]: Danh sách giọng nói khả dụng:", voicesList.map(v => `${v.name} (${v.lang})`));
+
             let voice = voicesList.find(
-              (v) => (v.lang === "vi-VN" || v.lang === "vi_VN") && v.name.toLowerCase().includes("google")
+              (v) => (v.lang.toLowerCase() === "vi-vn" || v.lang.toLowerCase() === "vi_vn" || v.lang.toLowerCase().startsWith("vi") || v.lang.toLowerCase().includes("vi")) && v.name.toLowerCase().includes("google")
             );
             if (!voice) {
-              voice = voicesList.find((v) => v.lang === "vi-VN" || v.lang === "vi_VN");
+              voice = voicesList.find(
+                (v) => v.lang.toLowerCase() === "vi-vn" || v.lang.toLowerCase() === "vi_vn" || v.lang.toLowerCase().startsWith("vi") || v.lang.toLowerCase().includes("vi")
+              );
             }
+
             if (voice) {
+              console.log("[TTS Fallback]: Đã chọn giọng nói Tiếng Việt:", voice.name);
               utterance.voice = voice;
+            } else {
+              console.warn("[TTS Fallback]: Không tìm thấy giọng nói tiếng Việt chuyên biệt. Trình duyệt sẽ phát giọng mặc định.");
             }
 
             utterance.rate = 0.9;
@@ -250,7 +273,7 @@ export function AccessibilityProvider({ children }) {
         }
       }
     },
-    [stopSpeaking]
+    [stopSpeaking, browserVoices]
   );
 
   // ── Dispatch helpers ──────────────────────────────────────────
