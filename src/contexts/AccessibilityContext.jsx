@@ -283,14 +283,14 @@ export function AccessibilityProvider({ children }) {
 
           window.speechSynthesis.speak(utterance);
         } else {
-          // Fallback: Google Translate TTS via proxy
-          // Dev: Vite proxy in vite.config.js handles /api/tts → translate.googleapis.com
-          // Prod: Cloudflare Pages Function (functions/api/tts.js) handles the same path
-          // This avoids all CORS and referrer blocks from direct browser calls.
+          // Fallback: Google Translate TTS via Local Vite Proxy
+          // Works globally without requiring installed OS voices, avoiding CORS/Referrer blocks
+          // The API has a limit of 200 characters per request
           const safeText = text.length > 200 ? text.slice(0, 197) + "..." : text;
-          const url = `/api/tts?ie=UTF-8&tl=vi&q=${encodeURIComponent(safeText)}`;
+          const url = `/api/tts?client=gtx&ie=UTF-8&tl=vi&q=${encodeURIComponent(
+            safeText
+          )}`;
           const audio = new Audio();
-          audio.crossOrigin = "anonymous";
           audio.src = url;
           currentAudioRef.current = audio;
           audio.onended = () => {
