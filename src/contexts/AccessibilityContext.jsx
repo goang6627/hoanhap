@@ -291,6 +291,7 @@ export function AccessibilityProvider({ children }) {
             safeText
           )}`;
           const audio = new Audio();
+          audio.referrerPolicy = "no-referrer";
           audio.src = url;
           currentAudioRef.current = audio;
           audio.onended = () => {
