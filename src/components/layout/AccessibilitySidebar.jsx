@@ -33,25 +33,10 @@ export default function AccessibilitySidebar() {
   const { t, language } = useLanguage();
 
   const [sosModalOpen, setSosModalOpen] = useState(false);
-  const [isMobile, setIsMobile] = useState(false);
-
-  // Detect mobile for SOS behavior
-  useEffect(() => {
-    const check = () => setIsMobile(window.innerWidth < 768);
-    check();
-    window.addEventListener("resize", check);
-    return () => window.removeEventListener("resize", check);
-  }, []);
 
   const handleSOS = useCallback(() => {
-    if (isMobile) {
-      // On mobile: directly trigger phone call
-      window.location.href = "tel:115";
-    } else {
-      // On desktop/tablet: show modal
-      setSosModalOpen(true);
-    }
-  }, [isMobile]);
+    setSosModalOpen(true);
+  }, []);
 
   // Active state styling for toggle buttons
   const activeClasses =
