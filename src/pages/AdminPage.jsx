@@ -14,7 +14,7 @@ export default function AdminPage() {
   }
 
   // Dashboard counters (simulate mock stats + counts)
-  const [visitorCount] = useState(12840);
+  const [visitorCount] = useState(0);
   const [users, setUsers] = useState([]);
   const [allowanceRate, setAllowanceRate] = useState(360000);
 
