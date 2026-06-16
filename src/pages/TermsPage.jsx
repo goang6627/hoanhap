@@ -64,7 +64,7 @@ export default function TermsPage() {
               4. Miễn trừ trách nhiệm pháp lý và y tế
             </h2>
             <p className="text-sm leading-relaxed text-on-surface-variant dark:text-tertiary-fixed-dim">
-              Thông tin về chính sách bảo hiểm, y tế, giáo dục và hướng dẫn pháp lý trên trang web này chỉ mang tính chất tham khảo, giúp định hướng hành chính cho người khuyết tật. Hoà Nhập không chịu trách nhiệm pháp lý đối với bất kỳ quyết định y tế hoặc hành chính nào của bạn nếu không tham vấn trực tiếp các cơ quan nhà nước có thẩm quyền hoặc bác sĩ chuyên khoa.
+              Hoà Nhập là sản phẩm nghiên cứu học thuật trong khuôn khổ dự án tham dự cuộc thi sinh viên phi thương mại. Chúng tôi không phải là cơ quan chức năng của Nhà nước hay tổ chức tư vấn pháp lý/y tế chuyên nghiệp. Thông tin về chính sách bảo hiểm, y tế, giáo dục và hướng dẫn pháp lý trên trang web này chỉ mang tính chất tham khảo, mô phỏng và phục vụ học tập. Hoà Nhập không chịu trách nhiệm pháp lý đối với bất kỳ quyết định y tế hoặc hành chính nào của bạn nếu không tham vấn trực tiếp các cơ quan nhà nước có thẩm quyền hoặc bác sĩ chuyên khoa.
             </p>
           </div>
 

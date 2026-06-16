@@ -64,8 +64,11 @@ export default function AboutPage() {
             <h1 className="font-headline-xl text-headline-xl text-on-primary-container dark:text-on-primary-fixed mb-4">
               Về chúng tôi
             </h1>
-            <p className="font-body-lg text-body-lg text-on-primary-container/90 dark:text-on-primary-fixed/90 leading-relaxed">
-              Hoà Nhập là cổng thông tin hỗ trợ tiếp cận dịch vụ, chính sách và cơ hội phát triển bình đẳng dành cho người khuyết tật tại Việt Nam.
+            <p className="font-body-lg text-body-lg text-on-primary-container/90 dark:text-on-primary-fixed/90 leading-relaxed mb-4">
+              Hoà Nhập là sản phẩm nghiên cứu học thuật của nhóm sinh viên tham dự cuộc thi công nghệ, hướng tới mục tiêu hỗ trợ tiếp cận dịch vụ, chính sách và cơ hội phát triển bình đẳng dành cho người khuyết tật tại Việt Nam.
+            </p>
+            <p className="text-sm text-on-primary-container/80 dark:text-on-primary-fixed/80 italic bg-white/10 p-3 rounded-lg border border-white/10">
+              * Lưu ý: Đây là dự án học tập phi lợi nhuận phục vụ mục đích dự thi của sinh viên, không phải là website chính thức của cơ quan nhà nước hay tổ chức pháp lý chuyên nghiệp.
             </p>
           </div>
         </div>

@@ -56,7 +56,7 @@ const FAQ_DATABASE = [
     keywords: ["pháp lý", "luật", "quyền", "phân biệt", "bảo vệ"],
     question: "Hỗ trợ pháp lý",
     answer:
-      "NKT được trợ giúp pháp lý miễn phí theo Luật Trợ giúp pháp lý 2017:\n\n• Tư vấn pháp luật miễn phí.\n• Đại diện ngoài tố tụng.\n• Bào chữa trong vụ án hình sự.\n\nĐường dây nóng trợ giúp pháp lý: 1900 6179.\nTrung tâm trợ giúp pháp lý có tại mỗi tỉnh/thành phố.",
+      "Người khuyết tật được trợ giúp pháp lý miễn phí theo Luật Trợ giúp pháp lý 2017 của Nhà nước:\n\n• Tư vấn pháp luật miễn phí.\n• Đại diện ngoài tố tụng.\n• Bào chữa trong vụ án hình sự.\n\nĐường dây nóng trợ giúp pháp lý chính thức: 1900 6179.\nTrung tâm trợ giúp pháp lý có tại mỗi tỉnh/thành phố.\n\n(Lưu ý: Hệ thống chatbot thuộc dự án học tập sinh viên, chỉ cung cấp thông tin tham khảo định hướng hành chính mô phỏng, không thay thế cho tư vấn pháp lý chuyên nghiệp từ cơ quan có thẩm quyền).",
     links: [
       { label: "Góp ý & Phản hồi", to: "/gop-y" },
     ],
@@ -204,7 +204,7 @@ export default function ChatbotPanel() {
   const [messages, setMessages] = useState([
     {
       id: 1,
-      text: "Xin chào! Tôi là trợ lý ảo Hoà Nhập 🤝\n\nTôi có thể giúp bạn tra cứu quyền lợi, trợ cấp, tìm việc làm và các chính sách hỗ trợ người khuyết tật.\n\nBạn muốn hỏi về vấn đề gì?",
+      text: "Xin chào! Tôi là trợ lý ảo Hoà Nhập (Dự án học tập sinh viên) 🤝\n\nTôi có thể hỗ trợ tra cứu thông tin tham khảo về quyền lợi, trợ cấp, tìm việc làm và các chính sách hỗ trợ người khuyết tật.\n\nBạn muốn hỏi về vấn đề gì?",
       isUser: false,
       links: [],
     },

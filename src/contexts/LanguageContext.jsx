@@ -60,9 +60,9 @@ const translations = {
     home_search_placeholder: "Tìm kiếm nhanh quyền lợi hoặc trợ cấp...",
     home_services_title: "Dịch vụ trọng tâm",
     home_services_desc: "Những dịch vụ thiết yếu giúp người khuyết tật tiếp cận quyền lợi, kết nối cộng đồng và tìm kiếm hỗ trợ.",
-    home_cta_badge: "Hỗ trợ miễn phí",
-    home_cta_title: "Bạn cần hỗ trợ pháp lý trực tiếp?",
-    home_cta_desc: "Đội ngũ chuyên gia luật của chúng tôi luôn sẵn sàng tư vấn miễn phí cho người khuyết tật và gia đình.",
+    home_cta_badge: "Dự án sinh viên",
+    home_cta_title: "Bạn có đề xuất hoặc ý kiến đóng góp?",
+    home_cta_desc: "Đây là dự án học thuật của sinh viên nhằm hỗ trợ cộng đồng. Ý kiến phản hồi của bạn sẽ giúp chúng tôi hoàn thiện giải pháp tốt hơn.",
     home_cta_btn: "Góp ý ngay",
 
     // Home Services Cards
@@ -171,9 +171,9 @@ const translations = {
     home_search_placeholder: "Quick search for benefits or allowances...",
     home_services_title: "Core Services",
     home_services_desc: "Essential services helping people with disabilities access their rights, connect with communities, and find local support.",
-    home_cta_badge: "Free Legal Advice",
-    home_cta_title: "Need direct legal assistance?",
-    home_cta_desc: "Our legal experts are always ready to consult free of charge for disabled individuals and their families.",
+    home_cta_badge: "Student Project",
+    home_cta_title: "Have any suggestions or feedback?",
+    home_cta_desc: "This is a student academic project aimed at supporting the community. Your feedback will help us improve and refine the solution.",
     home_cta_btn: "Give Feedback",
 
     // Home Services Cards
