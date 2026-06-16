@@ -212,6 +212,7 @@ export default function MapPage() {
   const [mapCenter, setMapCenter] = useState(HANOI_CENTER);
   const [showDirections, setShowDirections] = useState(false);
   const [userLocation, setUserLocation] = useState(null);
+  const [mobileView, setMobileView] = useState("map"); // "map" or "list"
 
   // Focus trap for Directions/Details Overlay
   const overlayRef = useRef(null);
@@ -294,6 +295,7 @@ export default function MapPage() {
       setMapCenter([loc.lat, loc.lng]);
       setMapZoom(15);
       setShowDirections(false);
+      setMobileView("map");
 
       if (state.screenReader) {
         speakText(`Đã hiển thị thông tin ${loc.name}. Địa chỉ: ${loc.address}. Trạng thái hoạt động: ${loc.workingHours}.`);
@@ -304,6 +306,17 @@ export default function MapPage() {
 
   // Custom Zoom Control Helpers
   const mapRefForControls = useRef(null);
+
+  // Invalidate Leaflet map size when mobile view switches to map
+  useEffect(() => {
+    if (mobileView === "map" && mapRefForControls.current) {
+      const timer = setTimeout(() => {
+        mapRefForControls.current.invalidateSize();
+      }, 100);
+      return () => clearTimeout(timer);
+    }
+  }, [mobileView]);
+
   const handleZoomIn = () => {
     const map = mapRefForControls.current;
     if (map) {
@@ -332,13 +345,13 @@ export default function MapPage() {
       className="flex flex-col h-[calc(100vh-80px)] w-full bg-background dark:bg-tertiary/20 theme-transition overflow-hidden"
     >
       {/* ─── Top Filter panel ─── */}
-      <div className="w-full bg-surface dark:bg-tertiary border-b border-outline-variant dark:border-outline px-6 py-4 flex flex-col gap-4 z-10 theme-transition shadow-sm">
-        <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
+      <div className="w-full bg-surface dark:bg-tertiary border-b border-outline-variant dark:border-outline px-3 py-2 lg:px-6 lg:py-4 flex flex-col gap-2 lg:gap-4 z-10 theme-transition shadow-sm">
+        <div className="flex flex-col md:flex-row md:items-center justify-between gap-2 lg:gap-4">
           <div>
-            <h1 className="font-headline-lg text-2xl md:text-3xl font-extrabold text-primary dark:text-inverse-primary">
+            <h1 className="font-headline-lg text-lg lg:text-2xl md:text-3xl font-extrabold text-primary dark:text-inverse-primary">
               Bản đồ hỗ trợ tiếp cận
             </h1>
-            <p className="text-sm md:text-base text-on-surface-variant dark:text-tertiary-fixed-dim mt-1">
+            <p className="hidden lg:block text-sm md:text-base text-on-surface-variant dark:text-tertiary-fixed-dim mt-1">
               Tìm kiếm cơ sở y tế, trung tâm phục hồi chức năng và địa điểm hỗ trợ tiếp cận gần bạn.
             </p>
           </div>
@@ -346,7 +359,7 @@ export default function MapPage() {
           {/* Quick Search controls */}
           <div className="flex items-center gap-2 max-w-lg w-full">
             <div className="relative flex-grow">
-              <span className="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-outline" aria-hidden="true">
+              <span className="material-symbols-outlined absolute left-3 lg:left-4 top-1/2 -translate-y-1/2 text-outline" aria-hidden="true">
                 search
               </span>
               <input
@@ -355,7 +368,7 @@ export default function MapPage() {
                 onChange={(e) => setSearchQuery(e.target.value)}
                 placeholder="Nhập địa điểm hoặc tên cơ sở..."
                 aria-label="Tìm kiếm địa điểm trên bản đồ"
-                className="w-full pl-11 pr-4 h-12 rounded-xl border-2 border-outline-variant dark:border-outline focus:border-primary bg-surface-container-lowest dark:bg-tertiary text-on-surface dark:text-inverse-on-surface text-sm"
+                className="w-full pl-10 lg:pl-11 pr-4 h-10 lg:h-12 rounded-xl border-2 border-outline-variant dark:border-outline focus:border-primary bg-surface-container-lowest dark:bg-tertiary text-on-surface dark:text-inverse-on-surface text-sm"
               />
             </div>
             
@@ -363,7 +376,7 @@ export default function MapPage() {
               variant="secondary"
               onClick={handleNearMe}
               icon="my_location"
-              className="h-12 px-4 rounded-xl flex items-center justify-center font-bold text-sm text-nowrap gap-1 border-2 border-primary"
+              className="h-10 lg:h-12 px-3 lg:px-4 rounded-xl flex items-center justify-center font-bold text-sm text-nowrap gap-1 border-2 border-primary"
             >
               Gần tôi
             </Button>
@@ -374,7 +387,7 @@ export default function MapPage() {
         <div
           role="tablist"
           aria-label="Lọc địa điểm theo loại hình"
-          className="flex flex-wrap gap-2 overflow-x-auto pb-1"
+          className="flex flex-nowrap lg:flex-wrap gap-2 overflow-x-auto pb-1 scrollbar-hide"
         >
           {Object.values(LOCATION_CATEGORIES).map((cat) => {
             const isActive = selectedCategory === cat;
@@ -389,7 +402,7 @@ export default function MapPage() {
                     speakText(`Đang lọc theo ${cat}`);
                   }
                 }}
-                className={`px-4 py-2 text-sm font-bold rounded-full transition-all duration-150 active:scale-95 border-2 accessibility-focus
+                className={`px-3 lg:px-4 py-1.5 lg:py-2 text-xs lg:text-sm font-bold rounded-full transition-all duration-150 active:scale-95 border-2 accessibility-focus whitespace-nowrap
                   ${isActive
                     ? "bg-primary border-primary text-on-primary dark:bg-inverse-primary dark:border-inverse-primary dark:text-primary"
                     : "bg-surface-container border-outline-variant text-on-surface-variant dark:bg-tertiary-container dark:border-outline dark:text-tertiary-fixed-dim hover:border-primary"
@@ -405,7 +418,7 @@ export default function MapPage() {
       {/* ─── Split Layout Viewport ─── */}
       <div className="flex flex-1 w-full relative overflow-hidden">
         {/* Left Location List (450px wide) */}
-        <div className="w-[450px] max-w-full flex-shrink-0 bg-surface dark:bg-tertiary border-r-2 border-outline-variant dark:border-outline flex flex-col h-full theme-transition z-10">
+        <div className={`w-full lg:w-[450px] max-w-full flex-shrink-0 bg-surface dark:bg-tertiary border-r-2 border-outline-variant dark:border-outline flex flex-col h-full theme-transition z-10 ${mobileView === "list" ? "flex" : "hidden lg:flex"}`}>
           <div className="px-4 py-3 bg-surface-container dark:bg-tertiary-container/30 border-b border-outline-variant/30 flex justify-between items-center">
             <span className="text-sm font-bold text-on-surface dark:text-inverse-on-surface">
               Tìm thấy {filteredLocations.length} kết quả
@@ -517,7 +530,7 @@ export default function MapPage() {
         </div>
 
         {/* Right Leaflet Map Viewport */}
-        <div className="flex-grow h-full relative" aria-hidden="true">
+        <div className={`flex-grow h-full relative ${mobileView === "map" ? "block" : "hidden lg:block"}`} aria-hidden="true">
           <MapContainer
             center={mapCenter}
             zoom={mapZoom}
@@ -576,7 +589,7 @@ export default function MapPage() {
           {activeLocation && (
             <div
               ref={overlayRef}
-              className="absolute left-6 top-6 z-[1000] w-[400px] max-w-[calc(100%-48px)] bg-surface dark:bg-tertiary border-2 border-outline dark:border-outline-variant rounded-2xl overflow-hidden shadow-2xl animate-[slideUp_0.25s_ease-out] theme-transition"
+              className="absolute left-1/2 -translate-x-1/2 top-4 lg:left-6 lg:translate-x-0 lg:top-6 z-[1000] w-[400px] max-w-[calc(100%-32px)] lg:max-w-[calc(100%-48px)] max-h-[calc(100%-80px)] overflow-y-auto bg-surface dark:bg-tertiary border-2 border-outline dark:border-outline-variant rounded-2xl shadow-2xl animate-[slideUp_0.25s_ease-out] theme-transition"
             >
               {/* Card Header (Close button & image) */}
               <div className="relative h-44 w-full bg-slate-200">
@@ -716,6 +729,17 @@ export default function MapPage() {
               </div>
             </div>
           )}
+        </div>
+
+        {/* Floating Mobile Toggle Button */}
+        <div className="absolute bottom-6 left-1/2 -translate-x-1/2 z-[1000] lg:hidden">
+          <button
+            onClick={() => setMobileView((prev) => (prev === "map" ? "list" : "map"))}
+            className="bg-primary hover:bg-primary/90 text-on-primary font-bold px-6 py-3 rounded-full shadow-2xl flex items-center gap-2 transition-all active:scale-95 border-2 border-primary-container"
+          >
+            <Icon name={mobileView === "map" ? "list" : "map"} size="text-lg" />
+            <span>{mobileView === "map" ? "Xem danh sách" : "Xem bản đồ"}</span>
+          </button>
         </div>
       </div>
     </div>

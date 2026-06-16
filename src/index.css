@@ -613,3 +613,12 @@ html.high-contrast svg path {
 .dark ::-webkit-scrollbar-thumb:hover {
   background: rgba(176, 198, 255, 0.35);
 }
+
+/* Hide scrollbar for horizontal scroll containers */
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}

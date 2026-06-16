@@ -1,6 +1,45 @@
 import { useAccessibility } from "../contexts/AccessibilityContext";
 import Icon from "../components/ui/Icon";
 
+const TEAM_MEMBERS = [
+  {
+    name: "Ngô Huy Hoàng",
+    role: "Đội Trưởng Dự Án",
+    desc: "Lên ý tưởng, điều phối toàn bộ dự án, quản lý tiến độ và đảm bảo các tiêu chuẩn tiếp cận được thực thi tốt nhất.",
+    avatar: "https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?auto=format&fit=crop&q=80&w=200"
+  },
+  {
+    name: "Nguyễn Trần Thiện Đạt",
+    role: "Front End Developer",
+    desc: "Thiết kế và xây dựng giao diện người dùng, tích hợp các công cụ hỗ trợ tiếp cận như tăng cỡ chữ, chế độ tương phản cao và phím tắt.",
+    avatar: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&q=80&w=200"
+  },
+  {
+    name: "Trần Văn Lân",
+    role: "Back End Developer",
+    desc: "Xây dựng kiến trúc hệ thống máy chủ, quản lý cơ sở dữ liệu và tích hợp các API dịch vụ cốt lõi.",
+    avatar: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&q=80&w=200"
+  },
+  {
+    name: "Lương Ngọc Hiếu",
+    role: "R.API Developer",
+    desc: "Nghiên cứu và phát triển các API tiếp cận, tối ưu kết nối dịch vụ giọng nói (TTS) và các dịch vụ tích hợp.",
+    avatar: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&q=80&w=200"
+  },
+  {
+    name: "Nguyễn Tuấn Khang",
+    role: "Quản Lý Dữ Liệu",
+    desc: "Thu thập, kiểm duyệt, phân loại và chuẩn hóa các thông tin chính sách, địa điểm hỗ trợ tiếp cận.",
+    avatar: "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&q=80&w=200"
+  },
+  {
+    name: "Huỳnh Văn Tân",
+    role: "Tester",
+    desc: "Kiểm thử chất lượng sản phẩm, tối ưu khả năng tiếp cận chuẩn WCAG 2.2 và cải thiện trải nghiệm người dùng.",
+    avatar: "https://images.unsplash.com/photo-1522075469751-3a6694fb2f61?auto=format&fit=crop&q=80&w=200"
+  }
+];
+
 export default function AboutPage() {
   const { speakText } = useAccessibility();
 
@@ -111,57 +150,26 @@ export default function AboutPage() {
       {/* ─── Ban biên tập / Đội ngũ (Mock Team) ─── */}
       <section className="max-w-[1440px] mx-auto px-gutter py-12">
         <h2 className="font-headline-lg text-headline-lg text-on-surface dark:text-inverse-on-surface mb-8 text-center">
-          Ban Biên tập & Hỗ trợ kỹ thuật
+          Đội ngũ thực hiện dự án
         </h2>
         
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-          {/* Member 1 */}
-          <div className="bg-surface-container dark:bg-tertiary border-2 border-outline-variant dark:border-outline rounded-2xl p-6 text-center theme-transition hover:border-primary transition-all">
-            <div className="w-24 h-24 rounded-full overflow-hidden mx-auto mb-4 border-2 border-outline-variant">
-              <img
-                className="w-full h-full object-cover"
-                src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&q=80&w=200"
-                alt="Trưởng ban biên tập Nguyễn Thu Hà"
-              />
+          {TEAM_MEMBERS.map((member, idx) => (
+            <div key={idx} className="bg-surface-container dark:bg-tertiary border-2 border-outline-variant dark:border-outline rounded-2xl p-6 text-center theme-transition hover:border-primary transition-all">
+              <div className="w-24 h-24 rounded-full overflow-hidden mx-auto mb-4 border-2 border-outline-variant">
+                <img
+                  className="w-full h-full object-cover"
+                  src={member.avatar}
+                  alt={`Thành viên ${member.name}`}
+                />
+              </div>
+              <h3 className="font-bold text-lg text-on-surface dark:text-inverse-on-surface">{member.name}</h3>
+              <p className="text-xs text-primary dark:text-inverse-primary font-bold uppercase tracking-wider mt-1">{member.role}</p>
+              <p className="text-xs text-on-surface-variant dark:text-tertiary-fixed-dim mt-3 leading-relaxed">
+                {member.desc}
+              </p>
             </div>
-            <h3 className="font-bold text-lg text-on-surface dark:text-inverse-on-surface">Nguyễn Thu Hà</h3>
-            <p className="text-xs text-primary dark:text-inverse-primary font-bold uppercase tracking-wider mt-1">Trưởng Ban Biên tập</p>
-            <p className="text-xs text-on-surface-variant dark:text-tertiary-fixed-dim mt-3 leading-relaxed">
-              Chịu trách nhiệm nội dung, kiểm duyệt các văn bản chính sách và liên kết các nguồn lực cộng đồng.
-            </p>
-          </div>
-
-          {/* Member 2 */}
-          <div className="bg-surface-container dark:bg-tertiary border-2 border-outline-variant dark:border-outline rounded-2xl p-6 text-center theme-transition hover:border-primary transition-all">
-            <div className="w-24 h-24 rounded-full overflow-hidden mx-auto mb-4 border-2 border-outline-variant">
-              <img
-                className="w-full h-full object-cover"
-                src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=200"
-                alt="Kỹ sư phát triển phần mềm Trần Quang Huy"
-              />
-            </div>
-            <h3 className="font-bold text-lg text-on-surface dark:text-inverse-on-surface">Trần Quang Huy</h3>
-            <p className="text-xs text-primary dark:text-inverse-primary font-bold uppercase tracking-wider mt-1">Kỹ sư Tiếp cận Web</p>
-            <p className="text-xs text-on-surface-variant dark:text-tertiary-fixed-dim mt-3 leading-relaxed">
-              Phát triển các công cụ hỗ trợ tiếp cận WCAG 2.2, tối ưu hóa công nghệ đọc tiếng Việt và chatbot thông minh.
-            </p>
-          </div>
-
-          {/* Member 3 */}
-          <div className="bg-surface-container dark:bg-tertiary border-2 border-outline-variant dark:border-outline rounded-2xl p-6 text-center theme-transition hover:border-primary transition-all">
-            <div className="w-24 h-24 rounded-full overflow-hidden mx-auto mb-4 border-2 border-outline-variant">
-              <img
-                className="w-full h-full object-cover"
-                src="https://images.unsplash.com/photo-1567532939604-b6b5b0db2604?auto=format&fit=crop&q=80&w=200"
-                alt="Điều phối viên hoạt động xã hội Phạm Mai Anh"
-              />
-            </div>
-            <h3 className="font-bold text-lg text-on-surface dark:text-inverse-on-surface">Phạm Mai Anh</h3>
-            <p className="text-xs text-primary dark:text-inverse-primary font-bold uppercase tracking-wider mt-1">Điều phối viên Cộng đồng</p>
-            <p className="text-xs text-on-surface-variant dark:text-tertiary-fixed-dim mt-3 leading-relaxed">
-              Liên kết các đội xe hỗ trợ di chuyển miễn phí, tình nguyện viên học tập và tư vấn trực tiếp cho NKT nặng.
-            </p>
-          </div>
+          ))}
         </div>
       </section>
     </div>
