@@ -39,6 +39,27 @@ export default function FeedbackPage() {
       return;
     }
 
+    // Save feedback to mock database (localStorage)
+    const newFeedback = {
+      id: `fb-${Date.now()}`,
+      name: form.name,
+      contactInfo: form.contactInfo,
+      feedbackType: form.feedbackType,
+      isBarrierReport: form.isBarrierReport,
+      subject: form.subject,
+      message: form.message,
+      submittedAt: new Date().toISOString(),
+      status: "pending"
+    };
+    try {
+      const saved = localStorage.getItem("hoa-nhap-feedbacks");
+      const list = saved ? JSON.parse(saved) : [];
+      list.unshift(newFeedback);
+      localStorage.setItem("hoa-nhap-feedbacks", JSON.stringify(list));
+    } catch (err) {
+      console.error("Error saving feedback:", err);
+    }
+
     setSuccess(true);
     const msg = `Đã gửi ý kiến góp ý thành công. Xin chào ${form.name}, chúng tôi đã ghi nhận phản hồi của bạn về chủ đề ${form.feedbackType}. Cảm ơn sự đóng góp quý báu của bạn!`;
     if (accessState.screenReader) {

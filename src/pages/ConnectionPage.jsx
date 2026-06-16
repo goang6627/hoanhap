@@ -225,7 +225,12 @@ function FocusTrapModal({ isOpen, onClose, title, children }) {
 }
 
 export default function ConnectionPage() {
-  const [connections, setConnections] = useState(INITIAL_CONNECTIONS);
+  const [connections, setConnections] = useState(() => {
+    const saved = localStorage.getItem("hoa-nhap-connections");
+    if (saved) return JSON.parse(saved);
+    localStorage.setItem("hoa-nhap-connections", JSON.stringify(INITIAL_CONNECTIONS));
+    return INITIAL_CONNECTIONS;
+  });
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedRegion, setSelectedRegion] = useState("");
   const [selectedSupportType, setSelectedSupportType] = useState("");
@@ -317,7 +322,10 @@ export default function ConnectionPage() {
       details: regForm.details
     };
 
-    setConnections((prev) => [newVol, ...prev]);
+    const updated = [newVol, ...connections];
+    setConnections(updated);
+    localStorage.setItem("hoa-nhap-connections", JSON.stringify(updated));
+
     setRegSuccess(true);
     setRegForm({
       name: "",

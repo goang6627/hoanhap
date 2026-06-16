@@ -204,7 +204,12 @@ function calculateDistance(lat1, lon1, lat2, lon2) {
 
 export default function MapPage() {
   const { state, speakText } = useAccessibility();
-  const [locations, setLocations] = useState(INITIAL_LOCATIONS);
+  const [locations, setLocations] = useState(() => {
+    const saved = localStorage.getItem("hoa-nhap-map-locations");
+    if (saved) return JSON.parse(saved);
+    localStorage.setItem("hoa-nhap-map-locations", JSON.stringify(INITIAL_LOCATIONS));
+    return INITIAL_LOCATIONS;
+  });
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("Tất cả");
   const [activeLocation, setActiveLocation] = useState(null);
