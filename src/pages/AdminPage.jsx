@@ -252,6 +252,16 @@ export default function AdminPage() {
     }
   };
 
+  const handleUpdateUserBadge = async (userId, newBadge) => {
+    try {
+      await updateDoc(doc(db, "users", userId), { badge: newBadge });
+      speakText(`Đã cập nhật danh hiệu thành ${newBadge || "Không có"}`);
+    } catch (err) {
+      console.error("Failed to update user badge:", err);
+      alert("Lỗi khi cập nhật danh hiệu.");
+    }
+  };
+
   // Save Rights Policy
   const handleSavePolicy = async (e) => {
     e.preventDefault();
@@ -868,6 +878,7 @@ export default function AdminPage() {
                   <tr className="border-b border-outline-variant/60" role="row">
                     <th className="pb-3 font-bold text-on-surface-variant/70 uppercase" role="columnheader">Họ tên / Email</th>
                     <th className="pb-3 font-bold text-on-surface-variant/70 uppercase text-center" role="columnheader">Quyền hạn</th>
+                    <th className="pb-3 font-bold text-on-surface-variant/70 uppercase text-center" role="columnheader">Danh hiệu</th>
                     <th className="pb-3 font-bold text-on-surface-variant/70 uppercase text-center" role="columnheader">Trạng thái</th>
                     <th className="pb-3 font-bold text-on-surface-variant/70 uppercase text-right" role="columnheader">Hành động</th>
                   </tr>
@@ -875,7 +886,7 @@ export default function AdminPage() {
                 <tbody>
                   {users.length === 0 ? (
                     <tr>
-                      <td colSpan="4" className="py-6 text-center text-on-surface-variant/60">Chưa có người dùng nào đăng ký trên hệ thống.</td>
+                      <td colSpan="5" className="py-6 text-center text-on-surface-variant/60">Chưa có người dùng nào đăng ký trên hệ thống.</td>
                     </tr>
                   ) : (
                     users.map((u) => (
@@ -890,6 +901,19 @@ export default function AdminPage() {
                           }`}>
                             {u.role === "admin" ? "Admin" : "User"}
                           </span>
+                        </td>
+                        <td className="py-3 text-center" role="cell">
+                          <select
+                            value={u.badge || ""}
+                            onChange={(e) => handleUpdateUserBadge(u.id, e.target.value)}
+                            className="bg-surface-container-high dark:bg-tertiary-container border border-outline rounded-lg p-1 text-[10px] focus:outline-none focus:ring-1 focus:ring-primary theme-transition max-w-[120px]"
+                          >
+                            <option value="">(Không có)</option>
+                            <option value="Trái tim Vàng">Trái tim Vàng</option>
+                            <option value="Đại sứ Hoà Nhập">Đại sứ Hoà Nhập</option>
+                            <option value="Chuyên gia Tư vấn">Chuyên gia Tư vấn</option>
+                            <option value="Người truyền cảm hứng">Người truyền cảm hứng</option>
+                          </select>
                         </td>
                         <td className="py-3 text-center" role="cell">
                           <span className={`px-2.5 py-0.5 rounded-full font-bold text-[9px] uppercase ${

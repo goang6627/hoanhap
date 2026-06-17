@@ -145,13 +145,7 @@ export default function ForumPage({ isTab = false }) {
       return;
     }
 
-    // Determine badge for author
-    let userBadge = "";
-    if (user.role === "admin") {
-      userBadge = "Trái tim Vàng";
-    } else if (user.disabilityType && user.disabilityType !== "không khuyết tật") {
-      userBadge = "Đại sứ Hoà Nhập";
-    }
+    const userBadge = user.badge || "";
 
     const newPost = {
       title: newPostForm.title,
@@ -193,12 +187,7 @@ export default function ForumPage({ isTab = false }) {
     }
     if (!inputVal || !inputVal.trim()) return;
 
-    let userBadge = "";
-    if (user.role === "admin") {
-      userBadge = "Trái tim Vàng";
-    } else if (user.disabilityType && user.disabilityType !== "không khuyết tật") {
-      userBadge = "Đại sứ Hoà Nhập";
-    }
+    const userBadge = user.badge || "";
 
     const newComment = {
       id: "comm-" + Date.now(),
