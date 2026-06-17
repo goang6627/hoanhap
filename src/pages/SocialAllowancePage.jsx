@@ -307,63 +307,71 @@ export default function SocialAllowancePage() {
 
             <div className="relative border-l-2 border-primary/30 dark:border-outline ml-4 space-y-8 py-2">
               {/* Step 1 */}
-              <div className="relative pl-8 focus-visible:ring-2 focus-visible:ring-primary focus-visible:outline-none rounded" tabIndex={0}>
-                <span className="absolute -left-4 top-1 w-8 h-8 rounded-full bg-primary text-on-primary font-bold flex items-center justify-center text-sm">
+              <div className="relative pl-8 focus-visible:outline-none group" tabIndex={0}>
+                <span className="absolute -left-4 top-4 w-8 h-8 rounded-full bg-primary text-on-primary font-bold flex items-center justify-center text-sm shadow-sm transition-transform group-focus-visible:scale-110">
                   1
                 </span>
-                <h3 className="font-bold text-on-surface dark:text-inverse-on-surface text-base mb-1">
-                  {language === "en" ? "Determine Disability Level" : "Xác định mức độ khuyết tật"}
-                </h3>
-                <p className="text-sm text-on-surface-variant dark:text-tertiary-fixed-dim leading-relaxed">
-                  {language === "en"
-                    ? "The disabled person or guardian submits a request to the local commune-level Disability Assessment Council to undergo medical evaluation and receive a Disability Level Certificate."
-                    : "Người khuyết tật hoặc người giám hộ làm đơn đề nghị gửi Hội đồng xác định mức độ khuyết tật cấp xã nơi cư trú để được khám và cấp Giấy xác nhận mức độ khuyết tật."}
-                </p>
+                <div className="bg-surface-container-low dark:bg-tertiary-container/30 border border-outline-variant/50 rounded-2xl p-4 shadow-sm group-focus-visible:ring-2 group-focus-visible:ring-primary transition-all">
+                  <h3 className="font-bold text-on-surface dark:text-inverse-on-surface text-base mb-1">
+                    {language === "en" ? "Determine Disability Level" : "Xác định mức độ khuyết tật"}
+                  </h3>
+                  <p className="text-sm text-on-surface-variant dark:text-tertiary-fixed-dim leading-relaxed">
+                    {language === "en"
+                      ? "The disabled person or guardian submits a request to the local commune-level Disability Assessment Council to undergo medical evaluation and receive a Disability Level Certificate."
+                      : "Người khuyết tật hoặc người giám hộ làm đơn đề nghị gửi Hội đồng xác định mức độ khuyết tật cấp xã nơi cư trú để được khám và cấp Giấy xác nhận mức độ khuyết tật."}
+                  </p>
+                </div>
               </div>
 
               {/* Step 2 */}
-              <div className="relative pl-8 focus-visible:ring-2 focus-visible:ring-primary focus-visible:outline-none rounded" tabIndex={0}>
-                <span className="absolute -left-4 top-1 w-8 h-8 rounded-full bg-primary text-on-primary font-bold flex items-center justify-center text-sm">
+              <div className="relative pl-8 focus-visible:outline-none group" tabIndex={0}>
+                <span className="absolute -left-4 top-4 w-8 h-8 rounded-full bg-primary text-on-primary font-bold flex items-center justify-center text-sm shadow-sm transition-transform group-focus-visible:scale-110">
                   2
                 </span>
-                <h3 className="font-bold text-on-surface dark:text-inverse-on-surface text-base mb-1">
-                  {language === "en" ? "Prepare Required Documents" : "Chuẩn bị đầy đủ hồ sơ giấy tờ"}
-                </h3>
-                <p className="text-sm text-on-surface-variant dark:text-tertiary-fixed-dim leading-relaxed">
-                  {language === "en"
-                    ? "Prepare forms, certificates, and copies of identification files according to the Checklist listed on the right side of this page."
-                    : "Chuẩn bị tờ khai, giấy xác nhận và bản sao các tài liệu tùy thân theo danh sách yêu cầu chuẩn bị phía bên phải trang này."}
-                </p>
+                <div className="bg-surface-container-low dark:bg-tertiary-container/30 border border-outline-variant/50 rounded-2xl p-4 shadow-sm group-focus-visible:ring-2 group-focus-visible:ring-primary transition-all">
+                  <h3 className="font-bold text-on-surface dark:text-inverse-on-surface text-base mb-1">
+                    {language === "en" ? "Prepare Required Documents" : "Chuẩn bị đầy đủ hồ sơ giấy tờ"}
+                  </h3>
+                  <p className="text-sm text-on-surface-variant dark:text-tertiary-fixed-dim leading-relaxed">
+                    {language === "en"
+                      ? "Prepare forms, certificates, and copies of identification files according to the Checklist listed on the right side of this page."
+                      : "Chuẩn bị tờ khai, giấy xác nhận và bản sao các tài liệu tùy thân theo danh sách yêu cầu chuẩn bị phía bên phải trang này."}
+                  </p>
+                </div>
               </div>
 
               {/* Step 3 */}
-              <div className="relative pl-8 focus-visible:ring-2 focus-visible:ring-primary focus-visible:outline-none rounded" tabIndex={0}>
-                <span className="absolute -left-4 top-1 w-8 h-8 rounded-full bg-primary text-on-primary font-bold flex items-center justify-center text-sm">
+              <div className="relative pl-8 focus-visible:outline-none group" tabIndex={0}>
+                <span className="absolute -left-4 top-4 w-8 h-8 rounded-full bg-primary text-on-primary font-bold flex items-center justify-center text-sm shadow-sm transition-transform group-focus-visible:scale-110">
                   3
                 </span>
-                <h3 className="font-bold text-on-surface dark:text-inverse-on-surface text-base mb-1">
-                  {language === "en" ? "Submit Dossier" : "Nộp hồ sơ cho cơ quan tiếp nhận"}
-                </h3>
-                <p className="text-sm text-on-surface-variant dark:text-tertiary-fixed-dim leading-relaxed">
-                  {language === "en"
-                    ? "Submit directly to the One-Stop-Shop administrative department of the local commune-level People's Committee, or submit online via the provincial public service portal."
-                    : "Nộp trực tiếp tại Bộ phận Tiếp nhận và Trả kết quả của UBND cấp xã (phường/thị trấn) hoặc nộp trực tuyến qua Cổng dịch vụ công của địa phương."}
-                </p>
+                <div className="bg-surface-container-low dark:bg-tertiary-container/30 border border-outline-variant/50 rounded-2xl p-4 shadow-sm group-focus-visible:ring-2 group-focus-visible:ring-primary transition-all">
+                  <h3 className="font-bold text-on-surface dark:text-inverse-on-surface text-base mb-1">
+                    {language === "en" ? "Submit Dossier" : "Nộp hồ sơ cho cơ quan tiếp nhận"}
+                  </h3>
+                  <p className="text-sm text-on-surface-variant dark:text-tertiary-fixed-dim leading-relaxed">
+                    {language === "en"
+                      ? "Submit directly to the One-Stop-Shop administrative department of the local commune-level People's Committee, or submit online via the provincial public service portal."
+                      : "Nộp trực tiếp tại Bộ phận Tiếp nhận và Trả kết quả của UBND cấp xã (phường/thị trấn) hoặc nộp trực tuyến qua Cổng dịch vụ công của địa phương."}
+                  </p>
+                </div>
               </div>
 
               {/* Step 4 */}
-              <div className="relative pl-8 focus-visible:ring-2 focus-visible:ring-primary focus-visible:outline-none rounded" tabIndex={0}>
-                <span className="absolute -left-4 top-1 w-8 h-8 rounded-full bg-primary text-on-primary font-bold flex items-center justify-center text-sm">
+              <div className="relative pl-8 focus-visible:outline-none group" tabIndex={0}>
+                <span className="absolute -left-4 top-4 w-8 h-8 rounded-full bg-primary text-on-primary font-bold flex items-center justify-center text-sm shadow-sm transition-transform group-focus-visible:scale-110">
                   4
                 </span>
-                <h3 className="font-bold text-on-surface dark:text-inverse-on-surface text-base mb-1">
-                  {language === "en" ? "Approval & Allowance Payout" : "Thẩm định hồ sơ và Nhận trợ cấp"}
-                </h3>
-                <p className="text-sm text-on-surface-variant dark:text-tertiary-fixed-dim leading-relaxed">
-                  {language === "en"
-                    ? "Within 15-20 working days from receiving valid documents, the district-level Department of Labor, Invalids and Social Affairs will issue an approval decision for monthly social allowance."
-                    : "Trong vòng 15-20 ngày làm việc kể từ khi nhận đủ hồ sơ hợp lệ, Phòng Lao động - Thương binh & Xã hội cấp quận/huyện sẽ ra quyết định chi trả trợ cấp xã hội hàng tháng."}
-                </p>
+                <div className="bg-surface-container-low dark:bg-tertiary-container/30 border border-outline-variant/50 rounded-2xl p-4 shadow-sm group-focus-visible:ring-2 group-focus-visible:ring-primary transition-all">
+                  <h3 className="font-bold text-on-surface dark:text-inverse-on-surface text-base mb-1">
+                    {language === "en" ? "Approval & Allowance Payout" : "Thẩm định hồ sơ và Nhận trợ cấp"}
+                  </h3>
+                  <p className="text-sm text-on-surface-variant dark:text-tertiary-fixed-dim leading-relaxed">
+                    {language === "en"
+                      ? "Within 15-20 working days from receiving valid documents, the district-level Department of Labor, Invalids and Social Affairs will issue an approval decision for monthly social allowance."
+                      : "Trong vòng 15-20 ngày làm việc kể từ khi nhận đủ hồ sơ hợp lệ, Phòng Lao động - Thương binh & Xã hội cấp quận/huyện sẽ ra quyết định chi trả trợ cấp xã hội hàng tháng."}
+                  </p>
+                </div>
               </div>
             </div>
           </div>
