@@ -72,6 +72,12 @@ The app uses Firebase Firestore. Below are the primary collections:
 - Admins have exclusive rights to assign `badge`s to users via the Admin Dashboard.
 - Badges are assigned in the `users` collection and then retrieved during post/comment creation.
 
+### 4. UI/UX & Accessibility Enhancements
+- **FocusTrapModal:** Modified to use `useRef` for `onClose` handlers to prevent unintended focus resets during re-renders, adhering to strict WCAG focus trap standards.
+- **ConnectionPage:** Refactored to feature a modern "Glassmorphism" UI with deep shadows, backdrop-blurs, and micro-animations to enhance visual appeal.
+- **SocialAllowancePage:** Procedure steps are visually boxed (`border`, `bg-surface-container`) and explicitly tab-indexed for clear Text-to-Speech (TTS) reading order.
+- **Leaflet Maps:** Header z-index explicitly set to `[9999]` to prevent overlap with `react-leaflet` controls.
+
 ---
 
 ## 6. Deployment Workflow

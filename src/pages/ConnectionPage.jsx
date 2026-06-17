@@ -201,29 +201,30 @@ function FocusTrapModal({ isOpen, onClose, title, children }) {
 
   return (
     <div
-      className="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 flex items-center justify-center p-4 animate-[fadeIn_0.2s_ease-out]"
+      className="fixed inset-0 bg-black/60 backdrop-blur-md z-50 flex items-center justify-center p-4 animate-[fadeIn_0.3s_ease-out]"
       role="dialog"
       aria-modal="true"
       aria-labelledby="modal-title"
     >
       <div
         ref={modalRef}
-        className="bg-surface dark:bg-tertiary border-2 border-outline dark:border-outline-variant w-full max-w-lg rounded-2xl overflow-hidden shadow-2xl flex flex-col max-h-[90vh]"
+        className="bg-surface/95 dark:bg-tertiary/95 backdrop-blur-xl border border-white/40 dark:border-outline/30 w-full max-w-lg rounded-3xl overflow-hidden shadow-[0_20px_60px_-15px_rgba(0,0,0,0.5)] flex flex-col max-h-[90vh] animate-[slideUp_0.4s_cubic-bezier(0.16,1,0.3,1)]"
       >
         {/* Header */}
-        <div className="flex justify-between items-center p-4 border-b border-outline-variant/50 bg-primary text-on-primary">
-          <h2 id="modal-title" className="font-bold text-lg">{title}</h2>
+        <div className="flex justify-between items-center p-6 border-b border-outline-variant/30 bg-gradient-to-r from-primary to-primary-container text-on-primary relative">
+          <div className="absolute inset-0 bg-black/10 mix-blend-overlay"></div>
+          <h2 id="modal-title" className="font-bold text-xl relative z-10">{title}</h2>
           <button
             onClick={onClose}
             aria-label="Đóng hộp thoại"
-            className="w-10 h-10 rounded-full hover:bg-white/20 flex items-center justify-center transition-colors accessibility-focus"
+            className="w-10 h-10 rounded-full hover:bg-white/20 flex items-center justify-center transition-colors accessibility-focus relative z-10 backdrop-blur-sm bg-black/10"
           >
             <Icon name="close" />
           </button>
         </div>
 
         {/* Content */}
-        <div className="p-6 overflow-y-auto flex-grow text-on-surface dark:text-inverse-on-surface leading-relaxed text-sm">
+        <div className="p-6 md:p-8 overflow-y-auto flex-grow text-on-surface dark:text-inverse-on-surface leading-relaxed text-sm">
           {children}
         </div>
       </div>
@@ -365,7 +366,11 @@ export default function ConnectionPage({ isTab = false }) {
       
       {/* ─── Hero Section ─── */}
       {!isTab && (
-        <section className="relative w-full min-h-[360px] flex items-center bg-primary-container dark:bg-primary-fixed border-b-2 border-primary overflow-hidden">
+        <section className="relative w-full min-h-[420px] flex items-center bg-gradient-to-br from-primary-container to-primary overflow-hidden">
+          {/* Decorative background blobs */}
+          <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[60%] bg-[#00E5FF] rounded-full mix-blend-screen filter blur-[100px] opacity-20 animate-pulse"></div>
+          <div className="absolute bottom-[-20%] right-[-10%] w-[50%] h-[70%] bg-secondary rounded-full mix-blend-screen filter blur-[120px] opacity-30"></div>
+          
           <div className="absolute inset-0 z-0 flex items-center justify-center opacity-30 mix-blend-overlay">
             <img
               alt="Đồ họa hình trái tim kết nối cộng đồng"
@@ -373,20 +378,21 @@ export default function ConnectionPage({ isTab = false }) {
               src="https://images.unsplash.com/photo-1582213782179-e0d53f98f2ca?auto=format&fit=crop&q=80&w=1200"
             />
           </div>
-          <div className="absolute inset-0 z-0 bg-black/40"></div>
-          <div className="relative z-10 max-w-[1440px] mx-auto px-gutter w-full py-12 md:py-16">
-            <div className="max-w-2xl">
-              <h1 className="font-headline-xl text-headline-xl text-white dark:text-on-primary-fixed mb-4 drop-shadow-md">
+          <div className="absolute inset-0 z-0 bg-gradient-to-t from-primary/80 to-transparent"></div>
+          
+          <div className="relative z-10 max-w-[1440px] mx-auto px-gutter w-full pt-16 pb-28 md:pt-20 md:pb-36">
+            <div className="max-w-2xl text-center md:text-left">
+              <h1 className="font-headline-xl text-headline-xl text-white mb-6 drop-shadow-[0_4px_4px_rgba(0,0,0,0.3)]">
                 Kết nối yêu thương
               </h1>
-              <p className="font-body-lg text-body-lg text-white/95 dark:text-on-primary-fixed/90 mb-8 leading-relaxed drop-shadow-md">
+              <p className="font-body-lg text-body-lg text-white/95 mb-8 leading-relaxed drop-shadow-md">
                 Nơi kết nối bạn với những tấm lòng hảo tâm và cộng đồng sẵn sàng hỗ trợ, chia sẻ những khó khăn trong cuộc sống thường nhật.
               </p>
-              <div className="flex flex-wrap gap-4">
+              <div className="flex flex-wrap gap-4 justify-center md:justify-start">
                 <Button
                   variant="primary"
                   onClick={() => setIsRegisterOpen(true)}
-                  className="h-14 px-8 rounded-full shadow-lg"
+                  className="h-14 px-8 rounded-full shadow-[0_8px_30px_rgb(0,0,0,0.3)] bg-[#00E5FF] text-black hover:bg-cyan-300 border-none font-bold text-label-lg transition-transform hover:-translate-y-1"
                 >
                   Tham gia kết nối
                 </Button>
@@ -395,7 +401,7 @@ export default function ConnectionPage({ isTab = false }) {
                     const el = document.getElementById("search-section");
                     el?.scrollIntoView({ behavior: "smooth" });
                   }}
-                  className="h-14 px-8 border-2 border-on-primary-container dark:border-outline text-on-primary-container dark:text-on-primary-fixed font-semibold rounded-full hover:bg-on-primary-container hover:text-primary transition-all accessibility-focus"
+                  className="h-14 px-8 border-2 border-white/50 text-white font-semibold rounded-full hover:bg-white/10 hover:border-white transition-all accessibility-focus backdrop-blur-sm"
                 >
                   Tìm hiểu thêm
                 </button>
@@ -406,18 +412,18 @@ export default function ConnectionPage({ isTab = false }) {
       )}
 
       {/* ─── Search & Filters Panel ─── */}
-      <section id="search-section" className={`max-w-[1440px] mx-auto px-gutter ${isTab ? "py-8" : "py-12"}`}>
+      <section id="search-section" className={`max-w-[1440px] mx-auto px-gutter relative z-20 ${!isTab ? "-mt-20 md:-mt-24 mb-12" : "py-8"}`}>
         <form
           onSubmit={handleFilterSubmit}
-          className="bg-surface-container dark:bg-tertiary border-2 border-outline-variant dark:border-outline rounded-2xl p-6 shadow-sm flex flex-col md:flex-row items-end gap-6 theme-transition"
+          className="bg-surface/80 dark:bg-tertiary/80 backdrop-blur-xl border border-white/40 dark:border-outline-variant/30 rounded-3xl p-6 md:p-8 shadow-[0_20px_40px_-15px_rgba(0,0,0,0.1)] flex flex-col md:flex-row items-end gap-6 theme-transition"
         >
           {/* Text Input Search */}
           <div className="w-full md:w-1/3">
-            <label htmlFor="search-input" className="block text-label-large font-bold text-on-surface dark:text-tertiary-fixed mb-2">
+            <label htmlFor="search-input" className="block text-sm font-bold text-on-surface dark:text-inverse-on-surface mb-2">
               Tìm kiếm tên tổ chức/cá nhân
             </label>
-            <div className="relative">
-              <span className="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-outline" aria-hidden="true">
+            <div className="relative group">
+              <span className="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-outline group-focus-within:text-primary transition-colors" aria-hidden="true">
                 search
               </span>
               <input
@@ -428,7 +434,7 @@ export default function ConnectionPage({ isTab = false }) {
                   setSearchQuery(e.target.value);
                   setCurrentPage(1);
                 }}
-                className="w-full pl-12 pr-4 h-14 rounded-xl border-2 border-outline-variant dark:border-outline focus:border-primary bg-surface-container-lowest dark:bg-tertiary text-on-surface dark:text-inverse-on-surface"
+                className="w-full pl-12 pr-4 h-14 rounded-2xl border-2 border-outline-variant/50 dark:border-outline/50 focus:border-primary focus:ring-4 focus:ring-primary/10 bg-surface-container-lowest dark:bg-tertiary text-on-surface dark:text-inverse-on-surface transition-all outline-none"
                 placeholder="Tên cộng đồng, tình nguyện viên..."
               />
             </div>
@@ -436,46 +442,62 @@ export default function ConnectionPage({ isTab = false }) {
 
           {/* Region Select */}
           <div className="w-full md:w-1/4">
-            <label htmlFor="region-select" className="block text-label-large font-bold text-on-surface dark:text-tertiary-fixed mb-2">
+            <label htmlFor="region-select" className="block text-sm font-bold text-on-surface dark:text-inverse-on-surface mb-2">
               Khu vực
             </label>
-            <select
-              id="region-select"
-              value={selectedRegion}
-              onChange={(e) => {
-                setSelectedRegion(e.target.value);
-                setCurrentPage(1);
-              }}
-              className="w-full h-14 px-4 rounded-xl border-2 border-outline-variant dark:border-outline focus:border-primary bg-surface-container-lowest dark:bg-tertiary text-on-surface dark:text-inverse-on-surface cursor-pointer"
-            >
-              <option value="">Tất cả khu vực</option>
-              <option value="Hà Nội">Hà Nội</option>
-              <option value="TP. Hồ Chí Minh">TP. Hồ Chí Minh</option>
-              <option value="Đà Nẵng">Đà Nẵng</option>
-              <option value="Cần Thơ">Cần Thơ</option>
-            </select>
+            <div className="relative group">
+              <span className="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-outline group-focus-within:text-primary transition-colors pointer-events-none" aria-hidden="true">
+                location_on
+              </span>
+              <select
+                id="region-select"
+                value={selectedRegion}
+                onChange={(e) => {
+                  setSelectedRegion(e.target.value);
+                  setCurrentPage(1);
+                }}
+                className="w-full h-14 pl-12 pr-4 appearance-none rounded-2xl border-2 border-outline-variant/50 dark:border-outline/50 focus:border-primary focus:ring-4 focus:ring-primary/10 bg-surface-container-lowest dark:bg-tertiary text-on-surface dark:text-inverse-on-surface transition-all outline-none cursor-pointer"
+              >
+                <option value="">Tất cả khu vực</option>
+                <option value="Hà Nội">Hà Nội</option>
+                <option value="TP. Hồ Chí Minh">TP. Hồ Chí Minh</option>
+                <option value="Đà Nẵng">Đà Nẵng</option>
+                <option value="Cần Thơ">Cần Thơ</option>
+              </select>
+              <span className="material-symbols-outlined absolute right-4 top-1/2 -translate-y-1/2 text-outline pointer-events-none" aria-hidden="true">
+                expand_more
+              </span>
+            </div>
           </div>
 
           {/* Support Type Select */}
           <div className="w-full md:w-1/4">
-            <label htmlFor="support-select" className="block text-label-large font-bold text-on-surface dark:text-tertiary-fixed mb-2">
+            <label htmlFor="support-select" className="block text-sm font-bold text-on-surface dark:text-inverse-on-surface mb-2">
               Loại hình hỗ trợ
             </label>
-            <select
-              id="support-select"
-              value={selectedSupportType}
-              onChange={(e) => {
-                setSelectedSupportType(e.target.value);
-                setCurrentPage(1);
-              }}
-              className="w-full h-14 px-4 rounded-xl border-2 border-outline-variant dark:border-outline focus:border-primary bg-surface-container-lowest dark:bg-tertiary text-on-surface dark:text-inverse-on-surface cursor-pointer"
-            >
-              <option value="">Tất cả loại hình</option>
-              <option value="Vận chuyển">Vận chuyển</option>
-              <option value="Chăm sóc">Chăm sóc</option>
-              <option value="Hướng dẫn thủ tục">Hướng dẫn thủ tục</option>
-              <option value="Hỗ trợ học tập">Hỗ trợ học tập</option>
-            </select>
+            <div className="relative group">
+              <span className="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-outline group-focus-within:text-primary transition-colors pointer-events-none" aria-hidden="true">
+                category
+              </span>
+              <select
+                id="support-select"
+                value={selectedSupportType}
+                onChange={(e) => {
+                  setSelectedSupportType(e.target.value);
+                  setCurrentPage(1);
+                }}
+                className="w-full h-14 pl-12 pr-4 appearance-none rounded-2xl border-2 border-outline-variant/50 dark:border-outline/50 focus:border-primary focus:ring-4 focus:ring-primary/10 bg-surface-container-lowest dark:bg-tertiary text-on-surface dark:text-inverse-on-surface transition-all outline-none cursor-pointer"
+              >
+                <option value="">Tất cả loại hình</option>
+                <option value="Vận chuyển">Vận chuyển</option>
+                <option value="Chăm sóc">Chăm sóc</option>
+                <option value="Hướng dẫn thủ tục">Hướng dẫn thủ tục</option>
+                <option value="Hỗ trợ học tập">Hỗ trợ học tập</option>
+              </select>
+              <span className="material-symbols-outlined absolute right-4 top-1/2 -translate-y-1/2 text-outline pointer-events-none" aria-hidden="true">
+                expand_more
+              </span>
+            </div>
           </div>
 
           {/* Action Button */}
@@ -483,7 +505,7 @@ export default function ConnectionPage({ isTab = false }) {
             type="submit"
             variant="primary"
             icon="filter_list"
-            className="w-full md:w-auto h-14 px-8 rounded-xl font-bold"
+            className="w-full md:w-auto h-14 px-8 rounded-2xl font-bold bg-primary hover:bg-primary-container hover:text-on-primary-container shadow-md transition-all active:scale-95"
           >
             Lọc kết quả
           </Button>
@@ -493,7 +515,9 @@ export default function ConnectionPage({ isTab = false }) {
       {/* ─── Connection Profile Grid ─── */}
       <section className="max-w-[1440px] mx-auto px-gutter">
         <h2 className="font-headline-lg text-headline-lg text-on-surface dark:text-inverse-on-surface mb-8 flex items-center gap-3">
-          <Icon name="favorite" className="text-4xl text-secondary dark:text-inverse-primary" filled />
+          <div className="w-12 h-12 rounded-2xl bg-primary/10 flex items-center justify-center">
+            <Icon name="favorite" className="text-3xl text-primary dark:text-inverse-primary" filled />
+          </div>
           Danh sách kết nối hiện có
         </h2>
 
@@ -502,13 +526,16 @@ export default function ConnectionPage({ isTab = false }) {
             {paginatedConnections.map((conn) => (
               <div
                 key={conn.id}
-                className="bg-surface-container-lowest dark:bg-tertiary border-2 border-outline-variant dark:border-outline rounded-2xl p-6 hover:border-primary dark:hover:border-inverse-primary transition-all duration-200 shadow-sm flex flex-col justify-between theme-transition"
+                className="group bg-surface-container-lowest dark:bg-tertiary border border-outline-variant/40 dark:border-outline-variant/20 rounded-[2rem] p-6 hover:shadow-[0_20px_40px_-15px_rgba(0,0,0,0.1)] hover:-translate-y-2 hover:border-primary/30 transition-all duration-300 flex flex-col justify-between theme-transition relative overflow-hidden"
               >
-                <div>
-                  <div className="flex justify-between items-start mb-4">
-                    <div className="w-16 h-16 rounded-full overflow-hidden bg-primary-fixed border-2 border-outline-variant dark:border-outline flex-shrink-0">
+                {/* Decorative background gradient */}
+                <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-bl from-primary/5 to-transparent rounded-bl-full pointer-events-none transition-transform duration-500 group-hover:scale-110"></div>
+
+                <div className="relative z-10">
+                  <div className="flex justify-between items-start mb-6">
+                    <div className="w-20 h-20 rounded-2xl overflow-hidden bg-primary-fixed border border-outline-variant/30 shadow-md flex-shrink-0 relative group-hover:shadow-lg transition-all duration-300">
                       <img
-                        className="w-full h-full object-cover"
+                        className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
                         src={conn.avatarUrl}
                         alt={`Ảnh đại diện của ${conn.name}`}
                       />
@@ -516,44 +543,46 @@ export default function ConnectionPage({ isTab = false }) {
                     <span
                       role="status"
                       aria-label={`Loại hồ sơ: ${conn.typeLabel}`}
-                      className={`px-3 py-1 text-xs font-bold rounded-full uppercase tracking-wider ${
+                      className={`px-4 py-1.5 text-xs font-bold rounded-full capitalize tracking-wide shadow-sm border ${
                         conn.type === "tình nguyện viên"
-                          ? "bg-secondary-fixed text-on-secondary-fixed dark:bg-on-secondary-fixed-variant dark:text-secondary-fixed"
-                          : "bg-primary-fixed text-on-primary-fixed dark:bg-on-primary-fixed-variant dark:text-primary-fixed"
+                          ? "bg-secondary/10 text-secondary border-secondary/20 dark:bg-secondary-fixed/20 dark:text-secondary-fixed"
+                          : "bg-primary/10 text-primary border-primary/20 dark:bg-primary-fixed/20 dark:text-primary-fixed"
                       }`}
                     >
                       {conn.typeLabel}
                     </span>
                   </div>
 
-                  <h3 className="font-headline-md text-headline-md text-on-surface dark:text-inverse-on-surface mb-2 truncate">
+                  <h3 className="font-headline-md text-headline-md text-on-surface dark:text-inverse-on-surface mb-3 truncate group-hover:text-primary transition-colors">
                     {conn.name}
                   </h3>
                   
-                  <div className="flex items-center gap-2 text-outline dark:text-tertiary-fixed-dim mb-4">
-                    <Icon name="location_on" size="text-sm" />
+                  <div className="flex items-center gap-2 text-on-surface-variant dark:text-tertiary-fixed-dim mb-4">
+                    <div className="w-8 h-8 rounded-full bg-surface-variant dark:bg-tertiary-container flex items-center justify-center">
+                      <Icon name="location_on" size="text-sm" className="text-primary dark:text-inverse-primary" />
+                    </div>
                     <span className="text-sm font-semibold">{conn.location}</span>
                   </div>
 
-                  <p className="font-body-md text-body-md text-on-surface-variant dark:text-tertiary-fixed-dim mb-6 line-clamp-3 min-h-[84px]">
+                  <p className="font-body-md text-body-md text-on-surface-variant dark:text-tertiary-fixed-dim mb-6 line-clamp-3 min-h-[84px] leading-relaxed">
                     {conn.description}
                   </p>
                 </div>
 
-                <div className="flex gap-4 border-t border-outline-variant/30 pt-4">
+                <div className="flex gap-4 pt-4 relative z-10">
                   <Button
                     variant="primary"
                     onClick={() => setSelectedContact(conn)}
-                    className="flex-1 h-12 text-sm rounded-lg"
+                    className="flex-1 h-12 text-sm rounded-xl font-bold bg-primary hover:bg-primary-container hover:text-on-primary-container shadow-md hover:shadow-lg transition-all"
                   >
                     Liên hệ ngay
                   </Button>
                   <button
                     onClick={() => setSelectedProfile(conn)}
                     aria-label={`Xem chi tiết hồ sơ của ${conn.name}`}
-                    className="h-12 w-12 border-2 border-outline-variant dark:border-outline flex items-center justify-center rounded-lg text-on-surface dark:text-inverse-on-surface hover:bg-surface-container dark:hover:bg-tertiary-container transition-all accessibility-focus"
+                    className="h-12 w-12 border-2 border-outline-variant/50 dark:border-outline/50 flex items-center justify-center rounded-xl text-on-surface-variant dark:text-inverse-on-surface hover:bg-primary hover:border-primary hover:text-white dark:hover:bg-primary transition-all duration-300 accessibility-focus"
                   >
-                    <Icon name="visibility" />
+                    <Icon name="arrow_forward" />
                   </button>
                 </div>
               </div>
@@ -615,32 +644,36 @@ export default function ConnectionPage({ isTab = false }) {
       </section>
 
       {/* ─── Call to Action (CTA) ─── */}
-      <section className="w-full bg-surface-container dark:bg-tertiary/40 border-y border-outline-variant/30 py-16 md:py-20 mt-16 theme-transition">
+      <section className="w-full mt-24 mb-12 theme-transition">
         <div className="max-w-[1440px] mx-auto px-gutter">
-          <div className="bg-surface dark:bg-tertiary rounded-3xl p-8 md:p-14 border-2 border-outline-variant dark:border-outline flex flex-col md:flex-row items-center gap-12 relative overflow-hidden shadow-xl theme-transition">
-            <div className="absolute -right-20 -bottom-20 w-80 h-80 bg-primary/5 rounded-full blur-3xl" />
+          <div className="rounded-[2.5rem] p-8 md:p-16 flex flex-col md:flex-row items-center gap-12 relative overflow-hidden shadow-2xl bg-gradient-to-r from-primary to-primary-container border-4 border-white/10 group">
+            {/* Abstract decorative elements */}
+            <div className="absolute top-[-20%] left-[-10%] w-[50%] h-[150%] bg-gradient-to-br from-[#00E5FF]/20 to-transparent transform rotate-12 blur-[80px]"></div>
+            <div className="absolute bottom-[-30%] right-[-20%] w-[60%] h-[150%] bg-gradient-to-tl from-secondary/30 to-transparent transform -rotate-12 blur-[100px]"></div>
+            
             <div className="md:w-3/5 relative z-10 text-center md:text-left">
-              <h2 className="font-headline-xl text-headline-lg md:text-headline-xl text-primary dark:text-inverse-primary mb-6">
+              <h2 className="font-headline-xl text-headline-lg md:text-headline-xl text-white mb-6 drop-shadow-md">
                 Bạn muốn chia sẻ yêu thương?
               </h2>
-              <p className="font-body-lg text-body-lg text-on-surface-variant dark:text-tertiary-fixed-dim mb-8 leading-relaxed">
+              <p className="font-body-lg text-body-lg text-white/90 mb-10 leading-relaxed max-w-xl">
                 Mỗi sự giúp đỡ, dù nhỏ nhất, cũng góp phần xây dựng một cộng đồng bình đẳng và hạnh phúc hơn. Hãy đăng ký trở thành tình nguyện viên ngay hôm nay!
               </p>
               <Button
-                variant="danger"
+                variant="primary"
                 onClick={() => setIsRegisterOpen(true)}
-                className="h-16 px-10 rounded-full text-headline-md shadow-lg active:scale-95 transition-all"
+                className="h-16 px-10 rounded-full text-lg font-bold shadow-[0_10px_40px_rgba(0,229,255,0.4)] bg-[#00E5FF] text-black hover:bg-white hover:text-primary border-none active:scale-95 transition-all duration-300 hover:-translate-y-1"
               >
-                Đăng ký giúp đỡ
+                Đăng ký giúp đỡ ngay
               </Button>
             </div>
             
             <div className="md:w-2/5 flex justify-center relative z-10">
-              <div className="w-64 h-64 bg-primary-fixed dark:bg-on-primary-fixed-variant rounded-3xl flex items-center justify-center transform rotate-6 border-4 border-white dark:border-outline shadow-2xl">
+              <div className="w-64 h-64 bg-white/10 backdrop-blur-xl rounded-[3rem] flex items-center justify-center transform rotate-6 border border-white/20 shadow-2xl relative transition-transform duration-500 group-hover:rotate-12">
+                <div className="absolute inset-0 bg-gradient-to-tr from-white/5 to-transparent rounded-[3rem]"></div>
                 <Icon
                   name="volunteer_activism"
                   size="text-8xl"
-                  className="text-primary dark:text-primary-fixed rotate-12"
+                  className="text-white drop-shadow-lg transform -rotate-6 group-hover:scale-110 transition-transform duration-500"
                   filled
                 />
               </div>
