@@ -43,15 +43,6 @@ const SERVICES = [
     iconColor: "text-emerald-600 dark:text-emerald-400",
     iconBorder: "border-emerald-200 dark:border-emerald-800",
   },
-  {
-    to: "/dien-dan",
-    icon: "forum",
-    titleKey: "service_forum_title",
-    descKey: "service_forum_desc",
-    iconBg: "bg-teal-50 dark:bg-teal-950/50",
-    iconColor: "text-teal-600 dark:text-teal-400",
-    iconBorder: "border-teal-200 dark:border-teal-800",
-  },
 ];
 
 export default function HomePage() {
@@ -152,7 +143,7 @@ export default function HomePage() {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
           {SERVICES.map((service, i) => (
             <div key={service.to} className={`animate-fade-up stagger-${i + 1}`}>
               <ServiceCard
