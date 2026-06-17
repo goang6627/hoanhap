@@ -14,11 +14,11 @@ import Icon from "./Icon";
 
 const variantStyles = {
   primary:
-    "bg-primary text-on-primary hover:bg-primary-container hover:text-on-primary-container shadow-sm font-bold",
+    "bg-primary text-on-primary hover:bg-primary-container hover:text-on-primary shadow-sm font-bold",
   secondary:
     "bg-transparent text-primary border-2 border-primary hover:bg-primary-fixed hover:text-on-primary-fixed font-semibold",
   danger:
-    "bg-secondary text-on-secondary hover:bg-secondary-container hover:text-on-secondary-container shadow-md font-bold",
+    "bg-secondary text-on-secondary hover:bg-secondary-container hover:text-on-secondary shadow-md font-bold",
   ghost:
     "bg-transparent text-on-surface-variant hover:bg-surface-variant font-medium",
 };
@@ -45,6 +45,7 @@ export default function Button({
     transition-all duration-150
     active:scale-95
     focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-primary-container
+    focus-visible:ring-offset-2 focus-visible:ring-offset-surface-container-lowest
     disabled:opacity-50 disabled:cursor-not-allowed disabled:active:scale-100
     theme-transition
   `;

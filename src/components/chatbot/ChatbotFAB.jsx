@@ -40,7 +40,7 @@ export default function ChatbotFAB() {
         onBlur={() => setTooltipVisible(false)}
         className="w-16 h-16 bg-primary text-on-primary rounded-full
                    shadow-xl flex items-center justify-center
-                   hover:bg-primary-container hover:text-on-primary-container
+                   hover:bg-primary-container hover:text-on-primary
                    hover:scale-105
                    transition-all duration-200
                    focus-visible:ring-4 focus-visible:ring-primary-container

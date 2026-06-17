@@ -582,9 +582,16 @@ export default function RightsPage() {
                   <div
                     key={pol.id}
                     onClick={() => setActiveModalPolicy(pol)}
+                    onKeyDown={(e) => {
+                      if (e.key === "Enter" || e.key === " ") {
+                        e.preventDefault();
+                        setActiveModalPolicy(pol);
+                      }
+                    }}
                     onFocus={() => handleSpeakItem(`${pol.name}. Thuộc nhóm: ${pol.category}. Mô tả: ${pol.description}`)}
                     tabIndex={0}
                     role="button"
+                    aria-label={`Xem chi tiết quyền lợi: ${pol.name}`}
                     className="bg-surface-container-lowest dark:bg-tertiary border-2 border-outline-variant dark:border-outline rounded-2xl p-6 hover:border-primary dark:hover:border-inverse-primary transition-all duration-200 shadow-sm flex flex-col justify-between text-left theme-transition group focus-visible:ring-4 focus-visible:ring-primary"
                   >
                     <div>

@@ -37,8 +37,9 @@ export default function MainLayout() {
     e.preventDefault();
     const main = document.getElementById("main-content");
     if (main) {
+      const prefersReducedMotion = window.matchMedia?.("(prefers-reduced-motion: reduce)").matches;
       main.focus();
-      main.scrollIntoView({ behavior: "smooth" });
+      main.scrollIntoView({ behavior: prefersReducedMotion ? "auto" : "smooth" });
       if (state.screenReader) {
         speakText("Đã chuyển đến nội dung chính");
       }
@@ -57,12 +58,12 @@ export default function MainLayout() {
   }, []); // Only on mount
 
   return (
-    <div className="min-h-screen flex">
+    <div className="min-h-[100dvh] flex">
       {/* Fixed accessibility sidebar */}
       <AccessibilitySidebar />
 
       {/* Main content wrapper — offset by sidebar width */}
-      <div className="flex-1 flex flex-col w-full min-h-screen pl-sidebar-width">
+      <div className="flex-1 flex flex-col w-full min-h-[100dvh] pl-sidebar-width">
         {/* Skip-to-content link (WCAG 2.2 requirement)
             Absolutely positioned off-screen until focused via Tab.
             On focus: slides into view at top of viewport.

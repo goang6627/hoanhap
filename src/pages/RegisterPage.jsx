@@ -174,6 +174,7 @@ export default function RegisterPage() {
               <input
                 id="fullName"
                 type="text"
+                autoComplete="name"
                 value={formData.fullName}
                 onChange={handleChange}
                 aria-invalid={!!formErrors.fullName}
@@ -207,6 +208,7 @@ export default function RegisterPage() {
                 <input
                   id="email"
                   type="email"
+                  autoComplete="email"
                   value={formData.email}
                   onChange={handleChange}
                   aria-invalid={!!formErrors.email}
@@ -238,6 +240,7 @@ export default function RegisterPage() {
                 <input
                   id="phone"
                   type="tel"
+                  autoComplete="tel"
                   value={formData.phone}
                   onChange={handleChange}
                   aria-invalid={!!formErrors.phone}
@@ -273,6 +276,7 @@ export default function RegisterPage() {
                   <input
                     id="password"
                     type={showPassword ? "text" : "password"}
+                    autoComplete="new-password"
                     value={formData.password}
                     onChange={handleChange}
                     aria-invalid={!!formErrors.password}
@@ -314,6 +318,7 @@ export default function RegisterPage() {
                   <input
                     id="confirmPassword"
                     type={showConfirmPassword ? "text" : "password"}
+                    autoComplete="new-password"
                     value={formData.confirmPassword}
                     onChange={handleChange}
                     aria-invalid={!!formErrors.confirmPassword}
@@ -393,6 +398,7 @@ export default function RegisterPage() {
               <div className="relative">
                 <select
                   id="region"
+                  autoComplete="address-level1"
                   value={formData.region}
                   onChange={handleChange}
                   aria-invalid={!!formErrors.region}

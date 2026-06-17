@@ -70,7 +70,7 @@ export default function ForgotPasswordPage() {
             </div>
             <Link
               to="/dang-nhap"
-              className="w-full inline-flex justify-center items-center gap-2 bg-primary text-on-primary font-bold py-3.5 px-6 rounded-xl hover:bg-primary-container hover:text-on-primary-container focus-visible:ring-4 focus-visible:ring-primary-container transition-all active:scale-95 shadow-sm"
+              className="w-full inline-flex justify-center items-center gap-2 bg-primary text-on-primary font-bold py-3.5 px-6 rounded-xl hover:bg-primary-container hover:text-on-primary focus-visible:ring-4 focus-visible:ring-primary-container transition-all active:scale-95 shadow-sm"
             >
               <Icon name="arrow_back" size="text-xl" />
               Quay lại đăng nhập
@@ -100,6 +100,7 @@ export default function ForgotPasswordPage() {
               <input
                 id="email"
                 type="email"
+                autoComplete="email"
                 value={email}
                 onChange={(e) => {
                   setEmail(e.target.value);

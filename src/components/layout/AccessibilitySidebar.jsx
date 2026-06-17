@@ -1,4 +1,4 @@
-import { useState, useCallback, useEffect } from "react";
+import { useState, useCallback } from "react";
 import { useAccessibility } from "../../contexts/AccessibilityContext";
 import { useLanguage } from "../../contexts/LanguageContext";
 import Icon from "../ui/Icon";
@@ -78,6 +78,7 @@ export default function AccessibilitySidebar() {
         <button
           onClick={increaseFontScale}
           aria-label={`${t("sidebar_increase_desc")}. ${t("font_scale_current")}: ${Math.round(state.fontScale * 100)}%`}
+          aria-disabled={state.fontScale >= 2.0}
           className={`sidebar-tool-btn group transition-all duration-200 rounded-xl ${inactiveClasses}`}
           disabled={state.fontScale >= 2.0}
         >
@@ -95,6 +96,7 @@ export default function AccessibilitySidebar() {
         <button
           onClick={decreaseFontScale}
           aria-label={`${t("sidebar_decrease_desc")}. ${t("font_scale_current")}: ${Math.round(state.fontScale * 100)}%`}
+          aria-disabled={state.fontScale <= 0.8}
           className={`sidebar-tool-btn group transition-all duration-200 rounded-xl ${inactiveClasses}`}
           disabled={state.fontScale <= 0.8}
         >
@@ -146,7 +148,24 @@ export default function AccessibilitySidebar() {
           </span>
         </button>
 
-
+        {/* Tool 6: Enhanced keyboard navigation */}
+        <button
+          onClick={toggleKeyboardNav}
+          aria-label={t("sidebar_keyboard_desc") || "Bật hoặc tắt điều hướng bàn phím nổi bật"}
+          aria-pressed={state.keyboardNav}
+          className={`sidebar-tool-btn group transition-all duration-200 rounded-xl ${
+            state.keyboardNav ? activeClasses : inactiveClasses
+          }`}
+        >
+          <Icon
+            name="keyboard"
+            size="text-2xl"
+            className="group-hover:scale-110 transition-transform"
+          />
+          <span className="icon-label">
+            {t("sidebar_keyboard") || "Bàn phím"}
+          </span>
+        </button>
 
         {/* Spacer — pushes SOS to bottom */}
         <div className="flex-grow" aria-hidden="true" />

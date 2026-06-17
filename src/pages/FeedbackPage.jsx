@@ -19,6 +19,7 @@ export default function FeedbackPage() {
   
   const [success, setSuccess] = useState(false);
   const [errors, setErrors] = useState({});
+  const errorCount = Object.keys(errors).length;
 
   const validate = () => {
     const tempErrors = {};
@@ -102,7 +103,7 @@ export default function FeedbackPage() {
         <div className="max-w-3xl mx-auto">
           <div className="bg-surface-container dark:bg-tertiary border-2 border-outline-variant dark:border-outline rounded-3xl p-6 md:p-10 shadow-sm theme-transition">
             {success ? (
-              <div className="text-center py-16 space-y-6">
+              <div className="text-center py-16 space-y-6" role="status" aria-live="polite">
                 <div className="w-20 h-20 bg-emerald-100 dark:bg-emerald-950/50 text-emerald-600 dark:text-emerald-400 rounded-full flex items-center justify-center mx-auto shadow-inner border border-emerald-200 dark:border-emerald-900">
                   <Icon name="check" size="text-4xl" />
                 </div>
@@ -125,6 +126,17 @@ export default function FeedbackPage() {
                   Ý kiến đóng góp của bạn rất có giá trị đối với chúng tôi. Các trường có dấu (<span className="text-error">*</span>) là bắt buộc.
                 </p>
 
+                {errorCount > 0 && (
+                  <div
+                    className="rounded-xl border-2 border-error bg-error-container px-4 py-3 text-on-error-container"
+                    role="alert"
+                  >
+                    <p className="font-bold">
+                      Có {errorCount} trường cần kiểm tra lại.
+                    </p>
+                  </div>
+                )}
+
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   {/* Full Name */}
                   <div className="flex flex-col space-y-2">
@@ -139,6 +151,7 @@ export default function FeedbackPage() {
                       className={`w-full h-12 px-4 rounded-xl border-2 bg-surface-container-lowest dark:bg-tertiary text-on-surface dark:text-inverse-on-surface focus:outline-none focus:border-primary transition-all
                         ${errors.name ? "border-error" : "border-outline-variant dark:border-outline"}`}
                       placeholder="Nguyễn Văn A"
+                      aria-invalid={!!errors.name}
                       aria-describedby={errors.name ? "name-error" : undefined}
                     />
                     {errors.name && (
@@ -162,6 +175,7 @@ export default function FeedbackPage() {
                       className={`w-full h-12 px-4 rounded-xl border-2 bg-surface-container-lowest dark:bg-tertiary text-on-surface dark:text-inverse-on-surface focus:outline-none focus:border-primary transition-all
                         ${errors.contactInfo ? "border-error" : "border-outline-variant dark:border-outline"}`}
                       placeholder="0912xxxxxx hoặc email@example.com"
+                      aria-invalid={!!errors.contactInfo}
                       aria-describedby={errors.contactInfo ? "info-error" : undefined}
                     />
                     {errors.contactInfo && (
@@ -206,6 +220,7 @@ export default function FeedbackPage() {
                       className={`w-full h-12 px-4 rounded-xl border-2 bg-surface-container-lowest dark:bg-tertiary text-on-surface dark:text-inverse-on-surface focus:outline-none focus:border-primary transition-all
                         ${errors.subject ? "border-error" : "border-outline-variant dark:border-outline"}`}
                       placeholder="Ví dụ: Góp ý cải tiến giao diện đọc nói"
+                      aria-invalid={!!errors.subject}
                       aria-describedby={errors.subject ? "subject-error" : undefined}
                     />
                     {errors.subject && (
@@ -244,6 +259,7 @@ export default function FeedbackPage() {
                     className={`w-full px-4 py-3 rounded-xl border-2 bg-surface-container-lowest dark:bg-tertiary text-on-surface dark:text-inverse-on-surface focus:outline-none focus:border-primary transition-all
                       ${errors.message ? "border-error" : "border-outline-variant dark:border-outline"}`}
                     placeholder="Nhập nội dung chi tiết cần góp ý hoặc phản hồi..."
+                    aria-invalid={!!errors.message}
                     aria-describedby={errors.message ? "msg-error" : undefined}
                   />
                   {errors.message && (

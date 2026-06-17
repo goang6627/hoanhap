@@ -41,6 +41,15 @@
     border-radius: 4px;
   }
 
+  a,
+  button,
+  input,
+  select,
+  textarea,
+  [role="button"] {
+    -webkit-tap-highlight-color: rgba(0, 43, 107, 0.18);
+  }
+
   /* Dark mode focus: switch to bright inverse-primary */
   .dark *:focus-visible {
     outline-color: #b0c6ff;
@@ -210,7 +219,7 @@ html.high-contrast svg path {
 @layer components {
   /* Skip-to-content link: hidden until focused via Tab */
   .skip-link {
-    @apply absolute -top-full left-4 z-[9999] px-6 py-3
+    @apply fixed -top-full left-4 z-[9999] px-6 py-3
            bg-primary text-on-primary font-bold text-lg
            rounded-b-lg shadow-lg
            transition-all duration-200;
@@ -237,7 +246,7 @@ html.high-contrast svg path {
   .btn-primary {
     @apply bg-primary text-on-primary font-semibold
            px-6 py-3 rounded-lg
-           hover:bg-primary-container hover:text-on-primary-container
+           hover:bg-primary-container hover:text-on-primary
            active:scale-95
            transition-all duration-150
            min-h-btn
@@ -261,7 +270,7 @@ html.high-contrast svg path {
   .btn-danger {
     @apply bg-secondary text-on-secondary font-bold
            px-6 py-3 rounded-lg
-           hover:bg-secondary-container hover:text-on-secondary-container
+           hover:bg-secondary-container hover:text-on-secondary
            active:scale-95
            transition-all duration-150
            min-h-btn
@@ -361,6 +370,42 @@ html.high-contrast svg path {
     transparent 60%
   );
   animation: shimmer 3s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+  }
+
+  .shimmer-btn::after,
+  .cta-banner::before,
+  .service-card::before {
+    animation: none !important;
+  }
+}
+
+@media (forced-colors: active) {
+  *:focus-visible {
+    outline: 3px solid Highlight !important;
+    outline-offset: 3px;
+  }
+
+  button,
+  a,
+  input,
+  select,
+  textarea {
+    forced-color-adjust: auto;
+  }
 }
 
 /* ── Service card premium hover effects ── */

@@ -835,7 +835,7 @@ export default function AdminPage() {
                   </div>
                   <button
                     type="submit"
-                    className="w-full bg-primary text-on-primary font-bold py-3 rounded-xl hover:bg-primary-container hover:text-on-primary-container transition-all shadow-sm flex items-center justify-center gap-2 accessibility-focus active:scale-95 text-xs"
+                    className="w-full bg-primary text-on-primary font-bold py-3 rounded-xl hover:bg-primary-container hover:text-on-primary transition-all shadow-sm flex items-center justify-center gap-2 accessibility-focus active:scale-95 text-xs"
                   >
                     Lưu cấu hình
                   </button>
@@ -985,7 +985,7 @@ export default function AdminPage() {
                     });
                     setIsPolicyFormOpen(!isPolicyFormOpen);
                   }}
-                  className="bg-primary text-on-primary font-bold text-xs px-4 py-2.5 rounded-xl hover:bg-primary-container hover:text-on-primary-container transition-all flex items-center gap-1.5 accessibility-focus active:scale-95"
+                  className="bg-primary text-on-primary font-bold text-xs px-4 py-2.5 rounded-xl hover:bg-primary-container hover:text-on-primary transition-all flex items-center gap-1.5 accessibility-focus active:scale-95"
                 >
                   <Icon name={isPolicyFormOpen ? "expand_less" : "add"} size="text-sm" />
                   {isPolicyFormOpen ? "Đóng form" : "Thêm chính sách"}
@@ -1123,7 +1123,7 @@ export default function AdminPage() {
                     </button>
                     <button
                       type="submit"
-                      className="bg-primary text-on-primary font-bold px-6 py-2.5 rounded-xl hover:bg-primary-container hover:text-on-primary-container transition-all shadow-sm accessibility-focus"
+                      className="bg-primary text-on-primary font-bold px-6 py-2.5 rounded-xl hover:bg-primary-container hover:text-on-primary transition-all shadow-sm accessibility-focus"
                     >
                       {editingPolicyId ? "Cập nhật chính sách" : "Thêm mới chính sách"}
                     </button>
@@ -1206,7 +1206,7 @@ export default function AdminPage() {
                     setDocForm({ title: "", date: "", url: "" });
                     setIsDocFormOpen(!isDocFormOpen);
                   }}
-                  className="bg-primary text-on-primary font-bold text-xs px-4 py-2.5 rounded-xl hover:bg-primary-container hover:text-on-primary-container transition-all flex items-center gap-1.5 accessibility-focus active:scale-95"
+                  className="bg-primary text-on-primary font-bold text-xs px-4 py-2.5 rounded-xl hover:bg-primary-container hover:text-on-primary transition-all flex items-center gap-1.5 accessibility-focus active:scale-95"
                 >
                   <Icon name={isDocFormOpen ? "expand_less" : "add"} size="text-sm" />
                   {isDocFormOpen ? "Đóng form" : "Thêm văn bản"}
@@ -1268,7 +1268,7 @@ export default function AdminPage() {
                     </button>
                     <button
                       type="submit"
-                      className="bg-primary text-on-primary font-bold px-6 py-2.5 rounded-xl hover:bg-primary-container hover:text-on-primary-container transition-all shadow-sm accessibility-focus"
+                      className="bg-primary text-on-primary font-bold px-6 py-2.5 rounded-xl hover:bg-primary-container hover:text-on-primary transition-all shadow-sm accessibility-focus"
                     >
                       {editingDocId ? "Cập nhật văn bản" : "Lưu văn bản"}
                     </button>
@@ -1357,7 +1357,7 @@ export default function AdminPage() {
                   });
                   setIsLocFormOpen(!isLocFormOpen);
                 }}
-                className="bg-primary text-on-primary font-bold text-xs px-4 py-2.5 rounded-xl hover:bg-primary-container hover:text-on-primary-container transition-all flex items-center gap-1.5 accessibility-focus active:scale-95"
+                className="bg-primary text-on-primary font-bold text-xs px-4 py-2.5 rounded-xl hover:bg-primary-container hover:text-on-primary transition-all flex items-center gap-1.5 accessibility-focus active:scale-95"
               >
                 <Icon name={isLocFormOpen ? "expand_less" : "add"} size="text-sm" />
                 {isLocFormOpen ? "Đóng form" : "Thêm địa điểm"}
@@ -1493,7 +1493,7 @@ export default function AdminPage() {
                   </button>
                   <button
                     type="submit"
-                    className="bg-primary text-on-primary font-bold px-6 py-2.5 rounded-xl hover:bg-primary-container hover:text-on-primary-container transition-all shadow-sm accessibility-focus"
+                    className="bg-primary text-on-primary font-bold px-6 py-2.5 rounded-xl hover:bg-primary-container hover:text-on-primary transition-all shadow-sm accessibility-focus"
                   >
                     {editingLocId ? "Cập nhật địa điểm" : "Thêm địa điểm"}
                   </button>
@@ -1586,7 +1586,7 @@ export default function AdminPage() {
                   });
                   setIsConnFormOpen(!isConnFormOpen);
                 }}
-                className="bg-primary text-on-primary font-bold text-xs px-4 py-2.5 rounded-xl hover:bg-primary-container hover:text-on-primary-container transition-all flex items-center gap-1.5 accessibility-focus active:scale-95"
+                className="bg-primary text-on-primary font-bold text-xs px-4 py-2.5 rounded-xl hover:bg-primary-container hover:text-on-primary transition-all flex items-center gap-1.5 accessibility-focus active:scale-95"
               >
                 <Icon name={isConnFormOpen ? "expand_less" : "add"} size="text-sm" />
                 {isConnFormOpen ? "Đóng form" : "Thêm hồ sơ"}
@@ -1735,7 +1735,7 @@ export default function AdminPage() {
                   </button>
                   <button
                     type="submit"
-                    className="bg-primary text-on-primary font-bold px-6 py-2.5 rounded-xl hover:bg-primary-container hover:text-on-primary-container transition-all shadow-sm accessibility-focus"
+                    className="bg-primary text-on-primary font-bold px-6 py-2.5 rounded-xl hover:bg-primary-container hover:text-on-primary transition-all shadow-sm accessibility-focus"
                   >
                     {editingConnId ? "Cập nhật hồ sơ" : "Lưu hồ sơ"}
                   </button>
@@ -1920,7 +1920,7 @@ export default function AdminPage() {
                     });
                     setIsOfficeFormOpen(!isOfficeFormOpen);
                   }}
-                  className="bg-primary text-on-primary font-bold text-xs px-4 py-2.5 rounded-xl hover:bg-primary-container hover:text-on-primary-container transition-all flex items-center gap-1.5 accessibility-focus active:scale-95"
+                  className="bg-primary text-on-primary font-bold text-xs px-4 py-2.5 rounded-xl hover:bg-primary-container hover:text-on-primary transition-all flex items-center gap-1.5 accessibility-focus active:scale-95"
                 >
                   <Icon name={isOfficeFormOpen ? "expand_less" : "add"} size="text-sm" />
                   {isOfficeFormOpen ? "Đóng form" : "Thêm cơ quan"}
@@ -2009,7 +2009,7 @@ export default function AdminPage() {
                     </button>
                     <button
                       type="submit"
-                      className="bg-primary text-on-primary font-bold px-6 py-2.5 rounded-xl hover:bg-primary-container hover:text-on-primary-container transition-all shadow-sm accessibility-focus"
+                      className="bg-primary text-on-primary font-bold px-6 py-2.5 rounded-xl hover:bg-primary-container hover:text-on-primary transition-all shadow-sm accessibility-focus"
                     >
                       {editingOfficeId !== null ? "Cập nhật cơ quan" : "Thêm cơ quan"}
                     </button>

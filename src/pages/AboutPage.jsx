@@ -135,7 +135,7 @@ export default function AboutPage() {
             <div className="mt-8 flex gap-4">
               <button
                 onClick={handleReadCommitment}
-                className="bg-primary text-on-primary font-bold px-6 py-3 rounded-lg hover:bg-primary-container hover:text-on-primary-container transition-all shadow flex items-center gap-2 accessibility-focus active:scale-95"
+                className="bg-primary text-on-primary font-bold px-6 py-3 rounded-lg hover:bg-primary-container hover:text-on-primary transition-all shadow flex items-center gap-2 accessibility-focus active:scale-95"
               >
                 <Icon name="volume_up" />
                 Nghe đọc nội dung cam kết

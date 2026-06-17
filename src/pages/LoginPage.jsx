@@ -112,6 +112,7 @@ export default function LoginPage() {
             <input
               id="emailOrPhone"
               type="text"
+              autoComplete="username"
               value={formData.emailOrPhone}
               onChange={handleChange}
               aria-invalid={!!formErrors.emailOrPhone}
@@ -155,6 +156,7 @@ export default function LoginPage() {
               <input
                 id="password"
                 type={showPassword ? "text" : "password"}
+                autoComplete="current-password"
                 value={formData.password}
                 onChange={handleChange}
                 aria-invalid={!!formErrors.password}

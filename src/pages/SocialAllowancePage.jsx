@@ -290,7 +290,7 @@ export default function SocialAllowancePage() {
 
               <button
                 onClick={handleReadCalculation}
-                className="bg-primary text-on-primary font-bold px-5 py-3.5 rounded-xl hover:bg-primary-container hover:text-on-primary-container transition-all shadow-sm flex items-center gap-2 accessibility-focus shrink-0 active:scale-95 text-sm"
+                className="bg-primary text-on-primary font-bold px-5 py-3.5 rounded-xl hover:bg-primary-container hover:text-on-primary transition-all shadow-sm flex items-center gap-2 accessibility-focus shrink-0 active:scale-95 text-sm"
               >
                 <Icon name="volume_up" />
                 {t("allowance_calc_result_btn")}

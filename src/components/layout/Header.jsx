@@ -114,7 +114,7 @@ export default function Header() {
         </div>
 
         {/* ── Desktop Navigation ── */}
-        <nav aria-label={t("notifications")} className="hidden md:flex gap-2 lg:gap-6 items-center">
+        <nav aria-label="Điều hướng chính" className="hidden md:flex gap-2 lg:gap-6 items-center">
           {NAV_ITEMS.map((item) => (
             <NavLink
               key={item.to}
@@ -148,6 +148,7 @@ export default function Header() {
               aria-label={t("language")}
               aria-expanded={langOpen}
               aria-haspopup="true"
+              aria-controls="language-menu"
               className={`p-2 rounded-full transition-colors min-w-[48px] min-h-[48px] flex items-center justify-center focus-visible:ring-4 focus-visible:ring-primary active:scale-95 border ${
                 langOpen
                   ? "bg-primary/10 border-primary text-primary"
@@ -159,6 +160,7 @@ export default function Header() {
 
             {langOpen && (
               <div
+                id="language-menu"
                 className="absolute right-0 mt-2 w-48 bg-surface dark:bg-tertiary-container
                            border-2 border-outline-variant dark:border-outline rounded-xl shadow-lg py-2 z-50
                            animate-[slideUp_0.15s_ease-out]"
@@ -207,6 +209,7 @@ export default function Header() {
               aria-label={t("notifications")}
               aria-expanded={notifOpen}
               aria-haspopup="true"
+              aria-controls="notifications-panel"
               className={`p-2 rounded-full transition-colors min-w-[48px] min-h-[48px] flex items-center justify-center focus-visible:ring-4 focus-visible:ring-primary active:scale-95 border relative ${
                 notifOpen
                   ? "bg-primary/10 border-primary text-primary"
@@ -223,10 +226,11 @@ export default function Header() {
 
             {notifOpen && (
               <div
+                id="notifications-panel"
                 className="absolute right-0 mt-2 w-80 bg-surface dark:bg-tertiary-container
                            border-2 border-outline-variant dark:border-outline rounded-2xl shadow-xl py-2 z-50
                            animate-[slideUp_0.15s_ease-out]"
-                role="menu"
+                role="region"
                 aria-label="Bảng thông báo"
               >
                 <div className="px-4 py-2 border-b border-outline-variant/50 flex items-center justify-between">
@@ -245,10 +249,13 @@ export default function Header() {
 
                 <div className="max-h-[300px] overflow-y-auto py-1">
                   {notifications.map((n) => (
-                    <div
+                    <button
+                      type="button"
                       key={n.id}
                       onClick={() => toggleRead(n.id)}
-                      className={`px-4 py-3 border-b border-outline-variant/20 last:border-b-0 cursor-pointer hover:bg-surface-variant/40 dark:hover:bg-tertiary/20 transition-all flex items-start gap-2.5 ${
+                      aria-pressed={n.read}
+                      aria-label={`${language === "en" ? n.textEn : n.text}. ${n.read ? "Đã đọc" : "Chưa đọc"}`}
+                      className={`w-full text-left px-4 py-3 border-b border-outline-variant/20 last:border-b-0 cursor-pointer hover:bg-surface-variant/40 dark:hover:bg-tertiary/20 transition-all flex items-start gap-2.5 focus-visible:ring-4 focus-visible:ring-primary ${
                         !n.read ? "bg-primary/5 dark:bg-primary-fixed-dim/5" : ""
                       }`}
                     >
@@ -261,7 +268,7 @@ export default function Header() {
                           {n.date}
                         </span>
                       </div>
-                    </div>
+                    </button>
                   ))}
 
                   {notifications.length === 0 && (
@@ -286,15 +293,17 @@ export default function Header() {
                 aria-label={`Tài khoản của ${user.fullName}`}
                 aria-expanded={profileOpen}
                 aria-haspopup="true"
+                aria-controls="profile-menu"
                 className="w-12 h-12 rounded-full bg-primary text-on-primary font-bold text-label-lg
                            flex items-center justify-center transition-all duration-150 active:scale-95
-                           hover:bg-primary-container hover:text-on-primary-container focus-visible:ring-4 focus-visible:ring-primary shadow-sm"
+                           hover:bg-primary-container hover:text-on-primary focus-visible:ring-4 focus-visible:ring-primary shadow-sm"
               >
                 {user.fullName ? user.fullName.split(" ").pop().charAt(0).toUpperCase() : "U"}
               </button>
 
               {profileOpen && (
                 <div
+                  id="profile-menu"
                   className="absolute right-0 mt-2 w-56 bg-surface dark:bg-tertiary-container
                              border-2 border-outline-variant dark:border-outline rounded-xl shadow-lg py-2 z-50
                              animate-[slideUp_0.15s_ease-out]"
@@ -362,7 +371,7 @@ export default function Header() {
               to="/dang-nhap"
               className="bg-primary text-on-primary font-bold text-label-lg
                          px-4 md:px-6 py-3 rounded-lg
-                         hover:bg-primary-container hover:text-on-primary-container
+                         hover:bg-primary-container hover:text-on-primary
                          transition-all min-h-[48px]
                          focus-visible:ring-4 focus-visible:ring-primary-container
                          active:scale-95 shadow-sm

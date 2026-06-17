@@ -205,7 +205,7 @@ export default function NewsPage() {
                   Bản ghi phụ đề tương tác
                 </h3>
 
-                <div className="space-y-3 overflow-y-auto flex-1 pr-1" role="list">
+                <div className="space-y-3 overflow-y-auto flex-1 pr-1" aria-label="Các mốc phụ đề">
                   {transcriptData.map((line) => {
                     const isActive = currentTime >= line.start && currentTime < line.end;
                     return (
@@ -218,7 +218,6 @@ export default function NewsPage() {
                             ? "bg-primary text-on-primary font-bold shadow-sm"
                             : "hover:bg-surface-container-low dark:hover:bg-tertiary text-on-surface-variant dark:text-tertiary-fixed-dim"
                         }`}
-                        role="listitem"
                       >
                         <span className="block text-[10px] uppercase font-bold opacity-75 mb-0.5 font-mono">
                           Giây {line.start}
@@ -364,7 +363,7 @@ export default function NewsPage() {
                       alert(`Đã tải xuống thành công: ${doc.title}`);
                     }}
                     aria-label={`Tải xuống tài liệu ${doc.title}`}
-                    className="p-3 bg-primary text-on-primary rounded-xl hover:bg-primary-container hover:text-on-primary-container shadow-sm flex items-center justify-center focus-visible:ring-2 focus-visible:ring-primary active:scale-95 transition-all shrink-0"
+                    className="p-3 bg-primary text-on-primary rounded-xl hover:bg-primary-container hover:text-on-primary shadow-sm flex items-center justify-center focus-visible:ring-2 focus-visible:ring-primary active:scale-95 transition-all shrink-0"
                   >
                     <Icon name="download" size="text-base" />
                   </a>

@@ -9,7 +9,7 @@ const SUGGESTIONS = [
   { labelKey: "suggestion_tag_legal", query: "Hỗ trợ pháp lý", icon: "gavel" },
 ];
 
-export default function SearchBar({ onSearch }) {
+export default function SearchBar({ onSearch, placeholder }) {
   const [query, setQuery] = useState("");
   const { state, speakText } = useAccessibility();
   const { t } = useLanguage();
@@ -61,7 +61,7 @@ export default function SearchBar({ onSearch }) {
           type="text"
           value={query}
           onChange={(e) => setQuery(e.target.value)}
-          placeholder={t("search_placeholder")}
+          placeholder={placeholder || t("search_placeholder")}
           className="block w-full pl-16 pr-6 md:pr-40 py-5 md:py-6
                      border border-outline-variant/50 rounded-2xl
                      leading-5 bg-surface-container-lowest dark:bg-inverse-surface
@@ -80,7 +80,7 @@ export default function SearchBar({ onSearch }) {
           className="absolute inset-y-2.5 right-2.5 px-7
                      bg-primary text-on-primary font-bold text-label-lg
                      rounded-xl
-                     hover:bg-primary-container hover:text-on-primary-container
+                     hover:bg-primary-container hover:text-on-primary
                      transition-all duration-200
                      focus-visible:ring-4 focus-visible:ring-primary-container
                      hidden sm:flex items-center gap-2
@@ -94,7 +94,6 @@ export default function SearchBar({ onSearch }) {
       {/* Quick Suggestion Tags */}
       <div
         className="flex flex-wrap justify-center gap-3 mt-6"
-        role="list"
         aria-label={t("search_suggestions_label")}
       >
         <span className="text-sm font-semibold text-on-surface-variant/70 dark:text-surface-dim
@@ -105,8 +104,8 @@ export default function SearchBar({ onSearch }) {
         {SUGGESTIONS.map((item) => (
           <button
             key={item.labelKey}
-            role="listitem"
             onClick={() => handleSuggestionClick(item.query)}
+            aria-label={`${t("search_button")}: ${t(item.labelKey)}`}
             className="suggestion-chip text-sm font-semibold text-primary dark:text-inverse-primary
                        bg-primary/5 dark:bg-primary/10
                        hover:bg-primary/10 dark:hover:bg-primary/20

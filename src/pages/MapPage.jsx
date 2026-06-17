@@ -115,7 +115,7 @@ function CustomMarker({ location, isActive, onSelect }) {
         <div class="flex items-center justify-center w-10 h-10 rounded-full border-2 shadow-lg transition-all duration-200 cursor-pointer
           ${isActive
             ? "bg-secondary text-on-secondary border-on-secondary scale-110 shadow-secondary/50"
-            : "bg-primary text-on-primary border-white hover:bg-primary-container hover:text-on-primary-container"
+            : "bg-primary text-on-primary border-white hover:bg-primary-container hover:text-on-primary"
           }">
           <span class="material-symbols-outlined text-xl font-bold">${location.icon}</span>
         </div>

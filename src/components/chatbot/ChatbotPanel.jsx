@@ -468,7 +468,7 @@ export default function ChatbotPanel() {
               aria-label="Gửi câu hỏi"
               className="w-10 h-10 flex items-center justify-center
                          bg-primary text-on-primary rounded-xl
-                         hover:bg-primary-container hover:text-on-primary-container
+                         hover:bg-primary-container hover:text-on-primary
                          disabled:opacity-40 disabled:cursor-not-allowed
                          transition-all active:scale-95
                          focus-visible:ring-2 focus-visible:ring-primary-container"
@@ -493,8 +493,8 @@ export default function ChatbotPanel() {
                    active:scale-95
                    ${
                      isOpen
-                       ? "bg-secondary text-on-secondary hover:bg-secondary-container hover:text-on-secondary-container rotate-0"
-                       : "bg-primary text-on-primary hover:bg-primary-container hover:text-on-primary-container hover:scale-105"
+                       ? "bg-secondary text-on-secondary hover:bg-secondary-container hover:text-on-secondary rotate-0"
+                       : "bg-primary text-on-primary hover:bg-primary-container hover:text-on-primary hover:scale-105"
                    }`}
       >
         <Icon
