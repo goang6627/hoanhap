@@ -5,6 +5,7 @@ import { useLanguage } from "../contexts/LanguageContext";
 import SearchBar from "../components/ui/SearchBar";
 import ServiceCard from "../components/ui/ServiceCard";
 import Icon from "../components/ui/Icon";
+import GuideVideoSection from "../components/home/GuideVideoSection";
 
 const SERVICES = [
   {
@@ -122,6 +123,8 @@ export default function HomePage() {
           aria-hidden="true"
         />
       </section>
+
+      <GuideVideoSection />
 
       {/* ═══ Service Grid (Bento Style) ═══ */}
       <section
