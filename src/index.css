@@ -216,7 +216,7 @@ html.high-contrast svg path {
    ═══════════════════════════════════════════════════ */
 .reading-mark-overlay {
   --reading-mark-line-height: 1.75rem;
-  --reading-mark-height: 120px;
+  --reading-mark-height: calc(120px * var(--font-scale, 1));
   position: fixed;
   left: var(--sidebar-width, 80px);
   right: 0;
