@@ -55,7 +55,7 @@ const translations = {
     font_scale_current: "Cỡ chữ hiện tại",
 
     // HomePage
-    home_hero_badge: "Cổng thông tin hỗ trợ NKT hàng đầu Việt Nam",
+    home_hero_badge: "Cổng thông tin hỗ trợ người khuyết tật hàng đầu Việt Nam",
     home_hero_title: "Hòa nhập và Phát triển cùng cộng đồng",
     home_hero_desc: "Cổng thông tin hỗ trợ tiếp cận dịch vụ, chính sách và cơ hội việc làm dành cho người khuyết tật tại Việt Nam.",
     home_search_placeholder: "Tìm kiếm nhanh quyền lợi hoặc trợ cấp...",
@@ -72,7 +72,7 @@ const translations = {
     service_connection_title: "Kết nối yêu thương",
     service_connection_desc: "Kết nối bạn với các cộng đồng và cá nhân sẵn lòng hỗ trợ, chia sẻ cùng người khuyết tật trên toàn quốc.",
     service_map_title: "Bản đồ hỗ trợ",
-    service_map_desc: "Tìm kiếm cơ sở y tế, trung tâm phục hồi chức năng và địa điểm tiếp cận dành cho NKT gần bạn nhất.",
+    service_map_desc: "Tìm kiếm cơ sở y tế, trung tâm phục hồi chức năng và địa điểm tiếp cận dành cho người khuyết tật gần bạn nhất.",
     service_allowance_title: "Chế độ trợ cấp",
     service_allowance_desc: "Tra cứu các khoản trợ cấp, công cụ tính toán tự động mức hưởng theo Nghị định 20 và hướng dẫn thủ tục.",
     service_forum_title: "Diễn đàn kết nối",
