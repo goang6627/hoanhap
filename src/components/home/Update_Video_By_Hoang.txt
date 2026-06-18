@@ -1,6 +1,0 @@
-guide.mp4
-guide-poster.jpg
-guide.vi.vtt
-transcript
-
-đạt tốt WCAG 2.2. Chỉ thêm file .mp4 mà không có captions/transcript thì chưa đủ tốt cho accessibility.
