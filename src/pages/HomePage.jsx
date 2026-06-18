@@ -4,44 +4,45 @@ import { useAccessibility } from "../contexts/AccessibilityContext";
 import { useLanguage } from "../contexts/LanguageContext";
 import SearchBar from "../components/ui/SearchBar";
 import ServiceCard from "../components/ui/ServiceCard";
-import Icon from "../components/ui/Icon";
+import GuideVideoSection from "../components/home/GuideVideoSection";
+
+const IMAGE_SOURCES = {
+  rights:
+    "https://images.pexels.com/photos/7875785/pexels-photo-7875785.jpeg?auto=compress&cs=tinysrgb&w=800",
+  allowance:
+    "https://images.pexels.com/photos/6863260/pexels-photo-6863260.jpeg?auto=compress&cs=tinysrgb&w=800",
+  connection:
+    "https://images.pexels.com/photos/6646917/pexels-photo-6646917.jpeg?auto=compress&cs=tinysrgb&w=800",
+  map:
+    "https://images.pexels.com/photos/5921677/pexels-photo-5921677.jpeg?auto=compress&cs=tinysrgb&w=800",
+  feedback:
+    "https://images.pexels.com/photos/6646917/pexels-photo-6646917.jpeg?auto=compress&cs=tinysrgb&w=600",
+};
 
 const SERVICES = [
   {
     to: "/quyen-loi",
-    icon: "gavel",
     titleKey: "service_rights_title",
     descKey: "service_rights_desc",
-    iconBg: "bg-blue-50 dark:bg-blue-950/50",
-    iconColor: "text-primary",
-    iconBorder: "border-blue-200 dark:border-blue-800",
+    imageSrc: IMAGE_SOURCES.rights,
   },
   {
     to: "/tro-cap",
-    icon: "payments",
     titleKey: "service_allowance_title",
     descKey: "service_allowance_desc",
-    iconBg: "bg-amber-50 dark:bg-amber-950/50",
-    iconColor: "text-amber-600 dark:text-amber-400",
-    iconBorder: "border-amber-200 dark:border-amber-800",
+    imageSrc: IMAGE_SOURCES.allowance,
   },
   {
     to: "/ket-noi",
-    icon: "diversity_3",
     titleKey: "service_connection_title",
     descKey: "service_connection_desc",
-    iconBg: "bg-rose-50 dark:bg-rose-950/50",
-    iconColor: "text-rose-600 dark:text-rose-400",
-    iconBorder: "border-rose-200 dark:border-rose-800",
+    imageSrc: IMAGE_SOURCES.connection,
   },
   {
     to: "/ban-do",
-    icon: "map",
     titleKey: "service_map_title",
     descKey: "service_map_desc",
-    iconBg: "bg-emerald-50 dark:bg-emerald-950/50",
-    iconColor: "text-emerald-600 dark:text-emerald-400",
-    iconBorder: "border-emerald-200 dark:border-emerald-800",
+    imageSrc: IMAGE_SOURCES.map,
   },
 ];
 
@@ -123,6 +124,8 @@ export default function HomePage() {
         />
       </section>
 
+      <GuideVideoSection />
+
       {/* ═══ Service Grid (Bento Style) ═══ */}
       <section
         aria-labelledby="services-heading"
@@ -148,13 +151,10 @@ export default function HomePage() {
             <div key={service.to} className={`animate-fade-up stagger-${i + 1}`}>
               <ServiceCard
                 to={service.to}
-                icon={service.icon}
                 title={t(service.titleKey)}
                 description={t(service.descKey)}
                 ariaLabel={t(service.titleKey)}
-                iconBg={service.iconBg}
-                iconColor={service.iconColor}
-                iconBorder={service.iconBorder}
+                imageSrc={service.imageSrc}
               />
             </div>
           ))}
@@ -177,7 +177,6 @@ export default function HomePage() {
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full
                             bg-white/10 text-sm font-semibold mb-4
                             border border-white/10">
-              <Icon name="headset_mic" size="text-base" />
               {t("home_cta_badge")}
             </div>
             <h2
@@ -205,7 +204,6 @@ export default function HomePage() {
                        active:scale-95
                        hover:-translate-y-0.5"
           >
-            <Icon name="feedback" size="text-xl" />
             {t("home_cta_btn")}
           </button>
         </div>
