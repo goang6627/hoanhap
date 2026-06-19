@@ -18,9 +18,10 @@ export default function Footer() {
 
   return (
     <footer
-      className="footer-gradient bg-dots-pattern relative overflow-hidden
+      className="footer-gradient bg-[#111318] bg-dots-pattern relative overflow-hidden
                  text-gray-400 w-full mt-auto
                  border-t border-white/5 theme-transition"
+      style={{ backgroundColor: "#111318" }}
     >
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[80%] h-32 bg-primary/10 blur-[100px] pointer-events-none" />
       <div
