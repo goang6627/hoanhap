@@ -3,6 +3,8 @@ import { useNavigate } from "react-router-dom";
 import { useAuth } from "../contexts/AuthContext";
 import Button from "../components/ui/Button";
 import Icon from "../components/ui/Icon";
+import { db } from "../services/firebase";
+import { collection, onSnapshot, query, where, doc, updateDoc, orderBy } from "firebase/firestore";
 
 const DISABILITY_OPTIONS = [
   { value: "không khuyết tật", label: "Không khuyết tật" },
@@ -71,6 +73,49 @@ export default function ProfilePage() {
   const [formErrors, setFormErrors] = useState({});
   const [liveMessage, setLiveMessage] = useState("");
   const [saveLoading, setSaveLoading] = useState(false);
+
+  // Contact messages dashboard state
+  const [contactRequests, setContactRequests] = useState([]);
+  const [contactsLoading, setContactsLoading] = useState(true);
+
+  // Fetch contact requests for this user
+  useEffect(() => {
+    if (!user?.uid) {
+      setContactsLoading(false);
+      return;
+    }
+
+    const q = query(
+      collection(db, "contact_requests"),
+      where("receiverId", "==", user.uid),
+      orderBy("createdAt", "desc")
+    );
+
+    const unsubscribe = onSnapshot(q, (snapshot) => {
+      const list = [];
+      snapshot.forEach((docSnap) => {
+        list.push({ id: docSnap.id, ...docSnap.data() });
+      });
+      setContactRequests(list);
+      setContactsLoading(false);
+    }, (err) => {
+      console.error("Error fetching contact requests:", err);
+      setContactsLoading(false);
+    });
+
+    return unsubscribe;
+  }, [user?.uid]);
+
+  const handleMarkAsRead = async (requestId) => {
+    try {
+      await updateDoc(doc(db, "contact_requests", requestId), {
+        status: "read",
+      });
+      setLiveMessage("Đã đánh dấu là đã đọc.");
+    } catch (err) {
+      console.error("Failed to mark as read:", err);
+    }
+  };
 
   // Protected route logic: Redirect if not logged in
   useEffect(() => {
@@ -442,6 +487,102 @@ export default function ProfilePage() {
               </Button>
             </div>
           </div>
+        </div>
+
+        {/* ─── Contact Messages Dashboard ─── */}
+        <div className="bg-surface dark:bg-tertiary rounded-2xl border-2 border-outline-variant dark:border-outline p-6 md:p-8 shadow-sm space-y-6">
+          <div className="flex justify-between items-center border-b border-outline-variant/50 pb-4">
+            <h2 className="text-title-large font-bold text-primary dark:text-inverse-primary flex items-center gap-2">
+              <Icon name="mail" size="text-xl" />
+              Tin nhắn liên hệ
+              {contactRequests.filter(r => r.status === "unread").length > 0 && (
+                <span className="ml-2 px-2.5 py-0.5 text-xs font-bold bg-error text-on-error rounded-full animate-pulse">
+                  {contactRequests.filter(r => r.status === "unread").length} mới
+                </span>
+              )}
+            </h2>
+          </div>
+
+          {contactsLoading ? (
+            <div className="flex items-center justify-center py-12">
+              <span className="w-10 h-10 border-4 border-primary border-t-transparent rounded-full animate-spin" />
+            </div>
+          ) : contactRequests.length > 0 ? (
+            <div className="space-y-4 max-h-[500px] overflow-y-auto pr-1">
+              {contactRequests.map((req) => (
+                <div
+                  key={req.id}
+                  className={`p-5 rounded-xl border-2 transition-all duration-200 ${
+                    req.status === "unread"
+                      ? "border-primary/40 bg-primary-fixed/10 dark:bg-primary/5 shadow-md"
+                      : "border-outline-variant/30 dark:border-outline/30 bg-surface-container-low dark:bg-tertiary-container/20"
+                  }`}
+                >
+                  <div className="flex justify-between items-start gap-3">
+                    <div className="flex items-start gap-3 flex-1 min-w-0">
+                      <div className={`w-10 h-10 rounded-full flex items-center justify-center flex-shrink-0 ${
+                        req.status === "unread"
+                          ? "bg-primary text-on-primary"
+                          : "bg-surface-variant dark:bg-tertiary-container text-on-surface-variant"
+                      }`}>
+                        <Icon name={req.status === "unread" ? "mark_email_unread" : "drafts"} size="text-lg" />
+                      </div>
+                      <div className="flex-1 min-w-0">
+                        <div className="flex items-center gap-2 flex-wrap">
+                          <h3 className="font-bold text-sm text-on-surface dark:text-inverse-on-surface">
+                            {req.senderName}
+                          </h3>
+                          {req.status === "unread" && (
+                            <span className="px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider bg-primary text-on-primary rounded-full">
+                              Mới
+                            </span>
+                          )}
+                        </div>
+                        <p className="text-xs text-primary dark:text-inverse-primary font-semibold mt-0.5">
+                          {req.senderContact}
+                        </p>
+                      </div>
+                    </div>
+                    <span className="text-[11px] text-on-surface-variant dark:text-tertiary-fixed-dim whitespace-nowrap flex-shrink-0">
+                      {req.createdAt?.toDate ? req.createdAt.toDate().toLocaleDateString("vi-VN", {
+                        day: "2-digit", month: "2-digit", year: "numeric", hour: "2-digit", minute: "2-digit"
+                      }) : ""}
+                    </span>
+                  </div>
+
+                  <div className="mt-3 p-3 bg-surface-container-lowest dark:bg-tertiary/50 rounded-lg border border-outline-variant/20">
+                    <p className="text-sm text-on-surface dark:text-inverse-on-surface leading-relaxed whitespace-pre-wrap">
+                      {req.message}
+                    </p>
+                  </div>
+
+                  {req.status === "unread" && (
+                    <div className="mt-3 flex justify-end">
+                      <button
+                        onClick={() => handleMarkAsRead(req.id)}
+                        className="text-xs font-bold text-primary hover:text-primary-container dark:text-inverse-primary px-3 py-1.5 rounded-lg hover:bg-primary-fixed/20 transition-colors flex items-center gap-1.5 focus-visible:ring-2 focus-visible:ring-primary"
+                      >
+                        <Icon name="done_all" size="text-sm" />
+                        Đánh dấu đã đọc
+                      </button>
+                    </div>
+                  )}
+                </div>
+              ))}
+            </div>
+          ) : (
+            <div className="text-center py-12 px-4 flex flex-col items-center gap-3">
+              <div className="w-14 h-14 rounded-full bg-surface-variant dark:bg-tertiary-container flex items-center justify-center text-on-surface-variant">
+                <Icon name="inbox" size="text-3xl" />
+              </div>
+              <div>
+                <h3 className="font-bold text-sm text-on-surface dark:text-inverse-on-surface">Chưa có tin nhắn liên hệ</h3>
+                <p className="text-xs text-on-surface-variant dark:text-tertiary-fixed-dim mt-1 max-w-[280px] leading-relaxed mx-auto">
+                  Khi có người gửi yêu cầu liên hệ đến bạn qua trang Kết nối, tin nhắn sẽ hiển thị tại đây.
+                </p>
+              </div>
+            </div>
+          )}
         </div>
       </div>
     </div>

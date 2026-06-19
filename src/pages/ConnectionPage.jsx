@@ -2,7 +2,7 @@ import { useState, useMemo, useCallback, useEffect, useRef } from "react";
 import Icon from "../components/ui/Icon";
 import Button from "../components/ui/Button";
 import { db } from "../services/firebase";
-import { collection, onSnapshot, query, where, addDoc } from "firebase/firestore";
+import { collection, onSnapshot, query, where, addDoc, serverTimestamp } from "firebase/firestore";
 
 const VIETNAM_PROVINCES = [
   "Hà Nội",
@@ -259,6 +259,8 @@ export default function ConnectionPage({ isTab = false }) {
   // Form states inside contact modal
   const [contactForm, setContactForm] = useState({ name: "", contactInfo: "", message: "" });
   const [contactSuccess, setContactSuccess] = useState(false);
+  const [contactLoading, setContactLoading] = useState(false);
+  const [contactError, setContactError] = useState("");
 
   // Form states inside register volunteer modal
   const [regForm, setRegForm] = useState({
@@ -307,14 +309,34 @@ export default function ConnectionPage({ isTab = false }) {
 
   const totalPages = Math.max(1, Math.ceil(filteredConnections.length / ITEMS_PER_PAGE));
 
-  const handleContactSubmit = (e) => {
+  const handleContactSubmit = async (e) => {
     e.preventDefault();
-    setContactSuccess(true);
-    setContactForm({ name: "", contactInfo: "", message: "" });
-    setTimeout(() => {
-      setContactSuccess(false);
-      setSelectedContact(null);
-    }, 2000);
+    setContactLoading(true);
+    setContactError("");
+
+    try {
+      await addDoc(collection(db, "contact_requests"), {
+        senderName: contactForm.name,
+        senderContact: contactForm.contactInfo,
+        message: contactForm.message,
+        receiverId: selectedContact?.authorId || selectedContact?.id || "",
+        receiverName: selectedContact?.name || "",
+        status: "unread",
+        createdAt: serverTimestamp(),
+      });
+
+      setContactSuccess(true);
+      setContactForm({ name: "", contactInfo: "", message: "" });
+      setTimeout(() => {
+        setContactSuccess(false);
+        setSelectedContact(null);
+      }, 2500);
+    } catch (err) {
+      console.error("Failed to send contact request:", err);
+      setContactError("Gửi liên hệ không thành công. Vui lòng thử lại sau.");
+    } finally {
+      setContactLoading(false);
+    }
   };
 
   const handleRegisterSubmit = async (e) => {
@@ -760,11 +782,18 @@ export default function ConnectionPage({ isTab = false }) {
               />
             </div>
 
+            {contactError && (
+              <div className="p-3 bg-error-container/20 border border-error/30 rounded-xl text-error text-sm font-semibold flex items-center gap-2">
+                <Icon name="error" size="text-lg" />
+                {contactError}
+              </div>
+            )}
+
             <div className="flex gap-4 pt-2">
-              <Button type="submit" variant="primary" className="flex-1">
-                Gửi liên hệ
+              <Button type="submit" variant="primary" disabled={contactLoading} className="flex-1">
+                {contactLoading ? "Đang gửi..." : "Gửi liên hệ"}
               </Button>
-              <Button type="button" variant="secondary" onClick={() => setSelectedContact(null)} className="flex-1">
+              <Button type="button" variant="secondary" onClick={() => { setSelectedContact(null); setContactError(""); }} className="flex-1">
                 Hủy
               </Button>
             </div>

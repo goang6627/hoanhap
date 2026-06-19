@@ -4,6 +4,8 @@ import Icon from "../ui/Icon";
 import { useAuth } from "../../contexts/AuthContext";
 import { useLanguage } from "../../contexts/LanguageContext";
 import { useAccessibility } from "../../contexts/AccessibilityContext";
+import { db } from "../../services/firebase";
+import { collection, onSnapshot, query, where, orderBy } from "firebase/firestore";
 
 /**
  * Header — Sticky top app bar with navigation
@@ -56,7 +58,31 @@ export default function Header() {
     }
   ]);
 
-  const unreadCount = notifications.filter(n => !n.read).length;
+  // Real-time contact request notifications from Firestore
+  const [contactNotifCount, setContactNotifCount] = useState(0);
+
+  useEffect(() => {
+    if (!user?.uid) {
+      setContactNotifCount(0);
+      return;
+    }
+
+    const q = query(
+      collection(db, "contact_requests"),
+      where("receiverId", "==", user.uid),
+      where("status", "==", "unread")
+    );
+
+    const unsubscribe = onSnapshot(q, (snapshot) => {
+      setContactNotifCount(snapshot.size);
+    }, (err) => {
+      console.error("Error fetching contact notifications:", err);
+    });
+
+    return unsubscribe;
+  }, [user?.uid]);
+
+  const unreadCount = notifications.filter(n => !n.read).length + contactNotifCount;
 
   // Close all dropdowns helper
   const closeAllDropdowns = useCallback(() => {
